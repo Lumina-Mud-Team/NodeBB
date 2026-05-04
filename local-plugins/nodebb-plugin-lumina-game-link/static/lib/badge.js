@@ -77,11 +77,10 @@
     }
 
     function findUsernameAnchor(scope) {
-        const anchors = scope.querySelectorAll('a[href^="/user/"]');
-        for (const a of anchors) {
-            if ((a.textContent || '').trim().length > 0) return a;
-        }
-        return null;
+        // Harmony: l'anchor del nick è l'unico con data-uid (gli altri /user/ anchor
+        // sono wrappers dell'avatar senza data-uid).
+        return scope.querySelector('a[href^="/user/"][data-uid]')
+            || scope.querySelector('a[href^="/user/"][data-username]');
     }
 
     function findPostContentEl(postEl) {
