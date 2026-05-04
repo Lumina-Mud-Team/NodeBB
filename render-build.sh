@@ -85,5 +85,10 @@ fi
 ./nodebb setup || echo "  (setup returned non-zero, may be already initialized — continuing)"
 echo "==================================="
 
+# Activate plugins. Idempotent: nodebb activate is a no-op if already active.
+echo "===== Activating plugins ====="
+./nodebb activate nodebb-plugin-sso-google || echo "  (activation may have failed, check logs)"
+echo "=============================="
+
 # Build NodeBB assets (templates, JS bundles, CSS).
 ./nodebb build
