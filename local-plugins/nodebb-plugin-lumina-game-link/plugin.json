@@ -9,7 +9,13 @@
   "scripts": [
     "static/lib/badge.js"
   ],
+  "clientScripts": [
+    "static/lib/badge.js"
+  ],
   "less": [
+    "static/style/badge.less"
+  ],
+  "lessFiles": [
     "static/style/badge.less"
   ]
 }
