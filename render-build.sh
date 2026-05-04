@@ -35,9 +35,13 @@ cat > config.json <<EOF
     "password": "${MONGO_PASS}",
     "database": "${MONGO_DB}"
   },
-  "port": ${PORT:-10000}
+  "port": ${PORT:-10000},
+  "silent": false
 }
 EOF
+
+# Ensure logs directory exists (loader.js writes here even with silent=false).
+mkdir -p logs
 
 # Debug: validate generated config.json (mask password).
 echo "===== generated config.json (password masked) ====="
