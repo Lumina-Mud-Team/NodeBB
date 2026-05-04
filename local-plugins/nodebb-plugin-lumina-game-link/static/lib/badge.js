@@ -32,9 +32,15 @@
     }
 
     function findUsernameAnchor(scope) {
-        // Harmony renders the post author as <a href="/user/<slug>"> in the post header.
-        // Pick the FIRST one (the author link). Slot the badge right after it.
-        return scope.querySelector('a[href^="/user/"]');
+        // In a post there are usually 2+ links to /user/<slug>: the avatar (image)
+        // and the username text. Prefer the one that has visible text (the nick).
+        const anchors = scope.querySelectorAll('a[href^="/user/"]');
+        for (const a of anchors) {
+            // Skip if anchor contains only image (avatar) — we want the textual one.
+            const text = (a.textContent || '').trim();
+            if (text.length > 0) return a;
+        }
+        return null;
     }
 
     function decoratePost(postEl) {
