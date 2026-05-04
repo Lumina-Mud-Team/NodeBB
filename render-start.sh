@@ -38,6 +38,21 @@ EOF
   echo "  config.json regenerated, size $(stat -c%s config.json) bytes"
 fi
 
+echo "  uploads dir check:"
+UPLOADS=public/uploads
+if [ -d "$UPLOADS" ]; then
+  echo "    $UPLOADS EXISTS"
+  echo "    mount info:"
+  df -h "$UPLOADS" 2>&1 | sed 's/^/      /'
+  echo "    permissions: $(ls -ld $UPLOADS)"
+  echo "    file count: $(find $UPLOADS -type f 2>/dev/null | wc -l) files"
+  echo "    sample contents (first 5):"
+  ls -la "$UPLOADS" 2>&1 | head -10 | sed 's/^/      /'
+else
+  echo "    $UPLOADS MISSING — uploads will NOT persist"
+  mkdir -p "$UPLOADS"
+fi
+
 echo "##### render-start.sh END — launching node app.js (single-process mode) #####"
 # loader.js spawns workers with silent:true, hiding all real logs from Render.
 # app.js is the actual NodeBB server — single process, logs straight to stdout.
