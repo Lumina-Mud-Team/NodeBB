@@ -64,5 +64,15 @@ client.connect()
 "
 echo "====================================="
 
+# Run NodeBB headless setup. Idempotent: skips re-setup if already initialized.
+# Reads admin from NODEBB_ADMIN_USERNAME/EMAIL/PASSWORD env vars.
+# DB info comes from the config.json we generated above.
+echo "===== NodeBB setup (headless) ====="
+if [ -z "${NODEBB_ADMIN_USERNAME}" ] || [ -z "${NODEBB_ADMIN_EMAIL}" ] || [ -z "${NODEBB_ADMIN_PASSWORD}" ]; then
+  echo "  WARNING: NODEBB_ADMIN_* env vars not set — setup will fail on a fresh DB"
+fi
+./nodebb setup || echo "  (setup returned non-zero, may be already initialized — continuing)"
+echo "==================================="
+
 # Build NodeBB assets (templates, JS bundles, CSS).
 ./nodebb build
