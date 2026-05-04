@@ -39,5 +39,14 @@ cat > config.json <<EOF
 }
 EOF
 
+# Debug: validate generated config.json (mask password).
+echo "===== generated config.json (password masked) ====="
+sed -E 's/("password"[[:space:]]*:[[:space:]]*)"[^"]*"/\1"REDACTED"/' config.json
+echo "==================================================="
+echo "config.json absolute path:"
+ls -la "$(pwd)/config.json"
+echo "JSON syntax check:"
+node -e "JSON.parse(require('fs').readFileSync('config.json','utf8')); console.log('  ✓ valid JSON');"
+
 # Build NodeBB assets (templates, JS bundles, CSS).
 ./nodebb build
