@@ -1,0 +1,11 @@
+{
+  "name": "nodebb-plugin-lumina-game-link",
+  "version": "0.1.0",
+  "description": "Bridge tra vhrazul-server (game) e NodeBB: badge ruolo + endpoint per dati di gioco lookup via googleSub.",
+  "main": "library.js",
+  "license": "GPL-3.0",
+  "private": true,
+  "nbbpm": {
+    "compatibility": "^4.0.0"
+  }
+}

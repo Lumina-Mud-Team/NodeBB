@@ -19,12 +19,24 @@ cp install/package.json package.json
 # Install runtime dependencies only (skip dev tools, smaller install).
 npm install --omit=dev
 
-# Install NodeBB plugins that aren't part of the base package.json.
-# Add more plugins here as needed (one per line, no version pin = latest stable).
-echo "===== Installing NodeBB plugins ====="
+# Install NodeBB plugins from npm registry.
+echo "===== Installing NodeBB plugins (npm) ====="
 npm install --omit=dev --no-save \
   nodebb-plugin-sso-google
-echo "====================================="
+echo "==========================================="
+
+# Symlink local plugins from local-plugins/ into node_modules/ so NodeBB sees them.
+echo "===== Linking local plugins ====="
+if [ -d local-plugins ]; then
+  for plugin_dir in local-plugins/*/; do
+    plugin_name=$(basename "$plugin_dir")
+    target="node_modules/$plugin_name"
+    rm -rf "$target"
+    ln -sfn "$(pwd)/$plugin_dir" "$target"
+    echo "  linked $plugin_name → $target"
+  done
+fi
+echo "================================="
 
 # Generate config.json from environment variables provided by Render.
 # Required env vars (set them in Render dashboard → Environment):
@@ -87,7 +99,8 @@ echo "==================================="
 
 # Activate plugins. Idempotent: nodebb activate is a no-op if already active.
 echo "===== Activating plugins ====="
-./nodebb activate nodebb-plugin-sso-google || echo "  (activation may have failed, check logs)"
+./nodebb activate nodebb-plugin-sso-google || echo "  (sso-google activation failed, check logs)"
+./nodebb activate nodebb-plugin-lumina-game-link || echo "  (lumina-game-link activation failed, check logs)"
 echo "=============================="
 
 # Build NodeBB assets (templates, JS bundles, CSS).

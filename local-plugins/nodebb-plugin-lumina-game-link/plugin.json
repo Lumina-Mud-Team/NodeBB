@@ -1,0 +1,15 @@
+{
+  "id": "nodebb-plugin-lumina-game-link",
+  "url": "https://github.com/Lumina-Mud-Team/lumina-forum",
+  "library": "library.js",
+  "hooks": [
+    { "hook": "static:app.load", "method": "init" },
+    { "hook": "filter:user.summary", "method": "enrichUser" }
+  ],
+  "scripts": [
+    "static/lib/badge.js"
+  ],
+  "less": [
+    "static/style/badge.less"
+  ]
+}
