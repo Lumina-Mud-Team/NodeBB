@@ -1,6 +1,8 @@
 'use strict';
 
-// Decora i nick con un badge dal game server (admin/gm/player).
+// Decora ogni post con:
+//   - badge ruolo accanto al nick (👑/🛡️/⚔️)
+//   - riga compatta con i PG dell'autore sotto il contenuto del post
 // Cache in-memory per evitare round-trip ripetuti per lo stesso uid.
 
 (function () {
@@ -10,15 +12,33 @@
         player: { icon: '⚔️', label: 'Player' },
     };
 
-    const cache = new Map(); // uid -> Promise<{role, username}>
+    const STATUS_LABELS = {
+        idle:        '🟢',
+        in_combat:   '⚔️',
+        travelling:  '🧭',
+        dead:        '💀',
+        resting:     '💤',
+    };
+
+    const roleCache = new Map();      // uid -> Promise<{role, username}>
+    const charsCache = new Map();     // uid -> Promise<{characters, reveal}>
 
     function fetchRole(uid) {
-        if (!cache.has(uid)) {
-            cache.set(uid, fetch('/api/lumina/role/' + uid, { credentials: 'same-origin' })
+        if (!roleCache.has(uid)) {
+            roleCache.set(uid, fetch('/api/lumina/role/' + uid, { credentials: 'same-origin' })
                 .then(r => r.ok ? r.json() : { role: null })
                 .catch(() => ({ role: null })));
         }
-        return cache.get(uid);
+        return roleCache.get(uid);
+    }
+
+    function fetchCharacters(uid) {
+        if (!charsCache.has(uid)) {
+            charsCache.set(uid, fetch('/api/lumina/characters/' + uid, { credentials: 'same-origin' })
+                .then(r => r.ok ? r.json() : { characters: [], reveal: false })
+                .catch(() => ({ characters: [], reveal: false })));
+        }
+        return charsCache.get(uid);
     }
 
     function buildBadge(role, username) {
@@ -31,53 +51,83 @@
         return span;
     }
 
+    function buildCharactersRow(characters) {
+        if (!characters || !characters.length) return null;
+        const row = document.createElement('div');
+        row.className = 'lumina-pg-row';
+        const label = document.createElement('span');
+        label.className = 'lumina-pg-label';
+        label.textContent = '👤 PG: ';
+        row.appendChild(label);
+        characters.forEach((c, i) => {
+            if (i > 0) {
+                const sep = document.createElement('span');
+                sep.className = 'lumina-pg-sep';
+                sep.textContent = ' · ';
+                row.appendChild(sep);
+            }
+            const item = document.createElement('span');
+            item.className = 'lumina-pg-item';
+            const status = STATUS_LABELS[c.status] || '';
+            item.textContent = `${status} ${c.name || '?'} (${c.class || '?'} lvl ${c.level || 1})`;
+            item.setAttribute('title', `${c.race || ''} ${c.class || ''} — status: ${c.status || 'unknown'}`);
+            row.appendChild(item);
+        });
+        return row;
+    }
+
     function findUsernameAnchor(scope) {
-        // In a post there are usually 2+ links to /user/<slug>: the avatar (image)
-        // and the username text. Prefer the one that has visible text (the nick).
         const anchors = scope.querySelectorAll('a[href^="/user/"]');
         for (const a of anchors) {
-            // Skip if anchor contains only image (avatar) — we want the textual one.
-            const text = (a.textContent || '').trim();
-            if (text.length > 0) return a;
+            if ((a.textContent || '').trim().length > 0) return a;
         }
         return null;
     }
 
+    function findPostContentEl(postEl) {
+        return postEl.querySelector('[component="post/content"]')
+            || postEl.querySelector('.content')
+            || postEl;
+    }
+
     function decoratePost(postEl) {
-        if (postEl.dataset.luminaBadged === '1') return;
+        if (postEl.dataset.luminaDecorated === '1') return;
         const uid = postEl.getAttribute('data-uid')
             || postEl.querySelector('[data-uid]')?.getAttribute('data-uid');
         if (!uid) return;
+        postEl.dataset.luminaDecorated = '1';
 
+        // Badge ruolo accanto al nick.
         const anchor = findUsernameAnchor(postEl);
-        if (!anchor) return;
+        if (anchor) {
+            fetchRole(uid).then(({ role, username }) => {
+                const badge = buildBadge(role, username);
+                if (badge) anchor.after(badge);
+            });
+        }
 
-        postEl.dataset.luminaBadged = '1';
-        fetchRole(uid).then(({ role, username }) => {
-            const badge = buildBadge(role, username);
-            if (badge && !anchor.nextSibling?.classList?.contains?.('lumina-badge')) {
-                anchor.after(badge);
-            }
-        });
+        // Riga PG sotto il contenuto del post.
+        const content = findPostContentEl(postEl);
+        if (content) {
+            fetchCharacters(uid).then(({ characters, reveal }) => {
+                if (!reveal) return;
+                const row = buildCharactersRow(characters);
+                if (row) content.appendChild(row);
+            });
+        }
     }
 
     function scan(root) {
         const scope = root || document;
-        // Posts: covered by [component="post"] in Harmony, with data-uid as attr.
         scope.querySelectorAll('[component="post"]').forEach(decoratePost);
-        // User cards / profile pages: container has data-uid.
-        scope.querySelectorAll('[component="user/header"], [component="user/info"]').forEach(decoratePost);
     }
 
-    // Wait for jQuery (NodeBB always loads it) then bind.
     function bind() {
         if (typeof window.$ === 'undefined') {
             return setTimeout(bind, 100);
         }
         $(document).ready(() => scan(document));
-        $(window).on('action:posts.loaded action:topic.loaded action:topics.loaded action:ajaxify.end', () => scan(document));
-        // Also scan on dynamic post insertions (infinite scroll).
-        $(window).on('action:posts.created action:posts.edited', () => scan(document));
+        $(window).on('action:posts.loaded action:topic.loaded action:topics.loaded action:ajaxify.end action:posts.created action:posts.edited', () => scan(document));
     }
     bind();
 })();
