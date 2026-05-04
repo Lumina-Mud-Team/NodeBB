@@ -35,6 +35,8 @@ if [ -d local-plugins ]; then
     ln -sfn "$(pwd)/$plugin_dir" "$target"
     echo "  linked $plugin_name → $target"
   done
+else
+  echo "  (no local-plugins/ dir, skipping)"
 fi
 echo "================================="
 
@@ -103,7 +105,8 @@ echo "======================================"
 # Activate plugins. Idempotent: nodebb activate is a no-op if already active.
 echo "===== Activating plugins ====="
 ./nodebb activate nodebb-plugin-sso-google || echo "  (sso-google activation failed, check logs)"
-./nodebb activate nodebb-plugin-lumina-game-link || echo "  (lumina-game-link activation failed, check logs)"
+# nodebb-plugin-lumina-game-link rimosso 2026-05-04 (non più desiderato)
+./nodebb deactivate nodebb-plugin-lumina-game-link 2>/dev/null || true
 echo "=============================="
 
 # Build NodeBB assets (templates, JS bundles, CSS).
