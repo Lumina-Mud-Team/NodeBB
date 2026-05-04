@@ -87,15 +87,18 @@ client.connect()
 "
 echo "====================================="
 
-# Run NodeBB headless setup. Idempotent: skips re-setup if already initialized.
-# Reads admin from NODEBB_ADMIN_USERNAME/EMAIL/PASSWORD env vars.
-# DB info comes from the config.json we generated above.
-echo "===== NodeBB setup (headless) ====="
-if [ -z "${NODEBB_ADMIN_USERNAME}" ] || [ -z "${NODEBB_ADMIN_EMAIL}" ] || [ -z "${NODEBB_ADMIN_PASSWORD}" ]; then
-  echo "  WARNING: NODEBB_ADMIN_* env vars not set — setup will fail on a fresh DB"
+# NodeBB headless setup. Only runs on a FRESH install (when NODEBB_ADMIN_* env
+# vars are intentionally provided). On normal deploys, the DB already has admin
+# + schema, so setup is unnecessary and `./nodebb setup` would error out
+# because it requires admin:* creds to satisfy its sanity check.
+echo "===== NodeBB setup (conditional) ====="
+if [ -n "${NODEBB_ADMIN_USERNAME}" ] && [ -n "${NODEBB_ADMIN_EMAIL}" ] && [ -n "${NODEBB_ADMIN_PASSWORD}" ]; then
+  echo "  NODEBB_ADMIN_* present → running headless setup"
+  ./nodebb setup || echo "  (setup returned non-zero — may already be initialized, continuing)"
+else
+  echo "  NODEBB_ADMIN_* not set → skipping setup (DB already has admin from earlier deploy)"
 fi
-./nodebb setup || echo "  (setup returned non-zero, may be already initialized — continuing)"
-echo "==================================="
+echo "======================================"
 
 # Activate plugins. Idempotent: nodebb activate is a no-op if already active.
 echo "===== Activating plugins ====="
