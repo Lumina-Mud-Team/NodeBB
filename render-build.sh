@@ -1,6 +1,18 @@
 #!/usr/bin/env bash
 set -e
 
+# Debug: report which required env vars are present (values masked).
+echo "===== render-build.sh: env var check ====="
+for var in URL SECRET MONGO_HOST MONGO_PORT MONGO_USER MONGO_PASS MONGO_DB PORT; do
+  val="${!var}"
+  if [ -z "$val" ]; then
+    echo "  $var = (MISSING)"
+  else
+    echo "  $var = (set, ${#val} chars)"
+  fi
+done
+echo "=========================================="
+
 # Copy NodeBB's package.json template into root so npm install works.
 cp install/package.json package.json
 
