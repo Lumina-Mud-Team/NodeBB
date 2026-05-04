@@ -38,5 +38,7 @@ EOF
   echo "  config.json regenerated, size $(stat -c%s config.json) bytes"
 fi
 
-echo "##### render-start.sh END — launching node loader.js #####"
-exec node loader.js
+echo "##### render-start.sh END — launching node app.js (single-process mode) #####"
+# loader.js spawns workers with silent:true, hiding all real logs from Render.
+# app.js is the actual NodeBB server — single process, logs straight to stdout.
+exec node app.js
