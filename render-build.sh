@@ -35,7 +35,7 @@ cat > config.json <<EOF
     "password": "${MONGO_PASS}",
     "database": "${MONGO_DB}"
   },
-  "port": "${PORT:-10000}"
+  "port": ${PORT:-10000}
 }
 EOF
 
@@ -47,6 +47,22 @@ echo "config.json absolute path:"
 ls -la "$(pwd)/config.json"
 echo "JSON syntax check:"
 node -e "JSON.parse(require('fs').readFileSync('config.json','utf8')); console.log('  ✓ valid JSON');"
+
+# Test Mongo connection directly with the mongodb driver (proves Atlas reachable).
+echo "===== MongoDB connectivity test ====="
+node -e "
+const cfg = JSON.parse(require('fs').readFileSync('config.json','utf8')).mongo;
+const hosts = cfg.host.split(',').map((h,i) => h + ':' + cfg.port.split(',')[i]).join(',');
+const uri = 'mongodb://' + encodeURIComponent(cfg.username) + ':' + encodeURIComponent(cfg.password) + '@' + hosts + '/' + cfg.database;
+console.log('  URI (masked):', uri.replace(cfg.password, '***'));
+const { MongoClient } = require('mongodb');
+const client = new MongoClient(uri, { serverSelectionTimeoutMS: 10000 });
+client.connect()
+  .then(() => client.db().command({ ping: 1 }))
+  .then(r => { console.log('  ✓ Mongo ping OK:', JSON.stringify(r)); return client.close(); })
+  .catch(err => { console.error('  ✗ Mongo connect FAILED:', err.message); process.exit(2); });
+"
+echo "====================================="
 
 # Build NodeBB assets (templates, JS bundles, CSS).
 ./nodebb build
