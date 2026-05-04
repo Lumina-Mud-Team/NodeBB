@@ -1,15 +1,12 @@
 'use strict';
 
-// Decora i nick con un badge che mostra il ruolo dal game server (admin/gm/player).
+// Decora i nick con un badge dal game server (admin/gm/player).
 // Cache in-memory per evitare round-trip ripetuti per lo stesso uid.
-//
-// Strategy: ogni volta che NodeBB renderizza nuovi post o utenti, scansiona il DOM
-// per trovare elementi con [data-uid] e fa una fetch a /api/lumina/role/:uid.
 
 (function () {
     const ROLE_LABELS = {
-        admin: { icon: '👑', label: 'Admin' },
-        gm:    { icon: '🛡️', label: 'GM' },
+        admin:  { icon: '👑', label: 'Admin' },
+        gm:     { icon: '🛡️', label: 'GM' },
         player: { icon: '⚔️', label: 'Player' },
     };
 
@@ -30,29 +27,51 @@
         const span = document.createElement('span');
         span.className = 'lumina-badge lumina-badge--' + role;
         span.setAttribute('title', 'Lumina: ' + (username || '?') + ' — ' + meta.label);
-        span.textContent = meta.icon;
+        span.textContent = ' ' + meta.icon;
         return span;
     }
 
-    function decorate(el) {
-        const uid = el.getAttribute('data-uid');
-        if (!uid || el.dataset.luminaBadged === '1') return;
-        el.dataset.luminaBadged = '1';
+    function findUsernameAnchor(scope) {
+        // Harmony renders the post author as <a href="/user/<slug>"> in the post header.
+        // Pick the FIRST one (the author link). Slot the badge right after it.
+        return scope.querySelector('a[href^="/user/"]');
+    }
+
+    function decoratePost(postEl) {
+        if (postEl.dataset.luminaBadged === '1') return;
+        const uid = postEl.getAttribute('data-uid')
+            || postEl.querySelector('[data-uid]')?.getAttribute('data-uid');
+        if (!uid) return;
+
+        const anchor = findUsernameAnchor(postEl);
+        if (!anchor) return;
+
+        postEl.dataset.luminaBadged = '1';
         fetchRole(uid).then(({ role, username }) => {
             const badge = buildBadge(role, username);
-            if (badge) el.appendChild(badge);
+            if (badge && !anchor.nextSibling?.classList?.contains?.('lumina-badge')) {
+                anchor.after(badge);
+            }
         });
     }
 
     function scan(root) {
-        (root || document).querySelectorAll('[component="post/header"] [data-uid], [component="user/picture"][data-uid], [component="topic/header"] [data-uid]').forEach(decorate);
+        const scope = root || document;
+        // Posts: covered by [component="post"] in Harmony, with data-uid as attr.
+        scope.querySelectorAll('[component="post"]').forEach(decoratePost);
+        // User cards / profile pages: container has data-uid.
+        scope.querySelectorAll('[component="user/header"], [component="user/info"]').forEach(decoratePost);
     }
 
-    // Initial scan + after every NodeBB re-render of posts/topics/users.
-    if (typeof $ !== 'undefined') {
+    // Wait for jQuery (NodeBB always loads it) then bind.
+    function bind() {
+        if (typeof window.$ === 'undefined') {
+            return setTimeout(bind, 100);
+        }
         $(document).ready(() => scan(document));
-        $(window).on('action:posts.loaded action:topics.loaded action:topic.loaded action:ajaxify.end', () => scan(document));
-    } else {
-        document.addEventListener('DOMContentLoaded', () => scan(document));
+        $(window).on('action:posts.loaded action:topic.loaded action:topics.loaded action:ajaxify.end', () => scan(document));
+        // Also scan on dynamic post insertions (infinite scroll).
+        $(window).on('action:posts.created action:posts.edited', () => scan(document));
     }
+    bind();
 })();
