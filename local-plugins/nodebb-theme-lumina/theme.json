@@ -1,8 +1,0 @@
-{
-  "id": "nodebb-theme-lumina",
-  "name": "Lumina",
-  "description": "Tema fantasy gold-on-ink di Lumina, basato su Harmony.",
-  "url": "https://lumina-mud.local/",
-  "screenshot": "screenshot.png",
-  "baseTheme": "nodebb-theme-harmony"
-}
