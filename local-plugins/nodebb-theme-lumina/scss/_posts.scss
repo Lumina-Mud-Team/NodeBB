@@ -1,0 +1,146 @@
+// Single post bodies inside a topic.
+
+[component="post"],
+[component="topic"] .posts > li {
+	background-color: var(--lumina-panel);
+	border: 1px solid var(--lumina-border);
+	border-radius: 6px;
+	box-shadow:
+		inset 0 1px 0 rgba(255, 255, 255, 0.03),
+		0 12px 28px -22px rgba(0, 0, 0, 0.7);
+	margin-bottom: 1rem;
+}
+
+[component="post"][data-index="0"],
+[component="post"].main-post {
+	border-color: var(--lumina-gold-dim);
+	box-shadow:
+		inset 0 1px 0 rgba(245, 210, 122, 0.06),
+		0 0 0 1px rgba(212, 168, 75, 0.12),
+		0 18px 40px -22px rgba(0, 0, 0, 0.8);
+}
+
+// Post body content (markdown / WYSIWYG output)
+[component="post/content"],
+.post-content {
+	font-family: var(--font-serif);
+	font-size: 1.05rem;
+	line-height: 1.7;
+	color: var(--lumina-fg);
+}
+
+[component="post/content"] a,
+.post-content a {
+	color: var(--lumina-fg-gold);
+	border-bottom: 1px solid transparent;
+	transition: color 0.15s ease, border-color 0.15s ease;
+}
+[component="post/content"] a:hover {
+	color: var(--lumina-gold-hi);
+	border-bottom-color: var(--lumina-gold-glow);
+}
+
+// Quote blocks inside posts
+[component="post/content"] blockquote,
+.post-content blockquote {
+	background: rgba(8, 9, 16, 0.55);
+	border-left: 3px solid var(--lumina-gold-dim);
+	padding: 0.75em 1em;
+	color: var(--lumina-fg-muted);
+	font-style: italic;
+	border-radius: 0 4px 4px 0;
+}
+
+// Post header strip (avatar + author + timestamp)
+[component="post/header"] {
+	border-bottom: 1px solid var(--lumina-border-soft);
+}
+
+[component="user/postcount"],
+[component="post"] .post-author,
+[component="post"] .username,
+[component="post/anonymous"],
+.post-info .username a {
+	font-family: var(--font-display);
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--lumina-fg-gold);
+	font-size: 0.9rem;
+}
+
+[component="post/header"] .timeago,
+[component="post/header"] small,
+[component="post"] .text-muted {
+	font-family: var(--font-serif);
+	font-style: italic;
+	color: var(--lumina-fg-dim) !important;
+}
+
+// Avatar gold ring
+[component="post"] .avatar,
+[component="post"] img.avatar {
+	border: 1px solid var(--lumina-border);
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+[component="post"]:hover .avatar {
+	border-color: var(--lumina-gold-dim);
+	box-shadow: 0 0 14px rgba(212, 168, 75, 0.18);
+}
+
+// Post tools (vote, reply, share, bookmark)
+[component="post/tools"],
+.post-tools {
+	gap: 0.4rem;
+}
+
+[component="post/tools"] .btn,
+[component="post/upvote"],
+[component="post/downvote"],
+[component="post/bookmark"],
+[component="post/reply"] {
+	background: transparent;
+	border: 1px solid transparent;
+	color: var(--lumina-fg-dim);
+	padding: 4px 10px;
+	border-radius: 3px;
+	transition: color 0.15s ease, background 0.15s ease,
+		border-color 0.15s ease;
+}
+
+[component="post/tools"] .btn:hover,
+[component="post/upvote"]:hover,
+[component="post/downvote"]:hover,
+[component="post/bookmark"]:hover,
+[component="post/reply"]:hover {
+	color: var(--lumina-gold-hi);
+	border-color: var(--lumina-gold-dim);
+	background: rgba(212, 168, 75, 0.06);
+}
+
+// Vote count
+[component="post/vote-count"] {
+	color: var(--lumina-fg-gold);
+	font-family: var(--font-display);
+	letter-spacing: 0.1em;
+}
+
+// Reactions (if reactions plugin active)
+.reaction-emoji {
+	background-color: var(--lumina-panel-2);
+	border: 1px solid var(--lumina-border);
+	border-radius: 12px;
+	padding: 2px 8px;
+}
+.reaction-emoji.reacted {
+	background-color: rgba(212, 168, 75, 0.12);
+	border-color: var(--lumina-gold-dim);
+}
+
+// Post separator (between posts in a long thread)
+hr.post-separator {
+	background: linear-gradient(90deg, transparent,
+		var(--lumina-gold-dim), transparent);
+	height: 1px;
+	border: 0;
+	margin: 2em 0;
+}

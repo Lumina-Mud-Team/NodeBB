@@ -109,5 +109,10 @@ echo "===== Activating plugins ====="
 ./nodebb deactivate nodebb-plugin-lumina-game-link 2>/dev/null || true
 echo "=============================="
 
+# Set active theme (idempotent — no-op if already active).
+echo "===== Setting active theme ====="
+./nodebb reset -t nodebb-theme-lumina || echo "  (theme reset failed, check logs)"
+echo "================================"
+
 # Build NodeBB assets (templates, JS bundles, CSS).
 ./nodebb build

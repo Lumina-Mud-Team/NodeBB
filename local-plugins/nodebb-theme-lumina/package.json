@@ -1,0 +1,16 @@
+{
+  "name": "nodebb-theme-lumina",
+  "version": "0.1.0",
+  "description": "Lumina theme for NodeBB — gold-on-ink fantasy aesthetic, child of Harmony.",
+  "main": "library.js",
+  "private": true,
+  "nbbpm": {
+    "compatibility": "^4.0.0"
+  },
+  "keywords": [
+    "nodebb",
+    "theme",
+    "lumina"
+  ],
+  "license": "UNLICENSED"
+}

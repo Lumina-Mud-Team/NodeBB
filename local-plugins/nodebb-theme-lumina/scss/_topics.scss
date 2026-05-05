@@ -1,0 +1,101 @@
+// Topic list rows (recent.tpl, unread.tpl, category.tpl, popular.tpl).
+
+[component="category"] [component="category/topic"],
+[component="topics"] [component="category/topic"],
+.topic-row {
+	background-color: var(--lumina-panel);
+	border-bottom: 1px solid var(--lumina-border-soft);
+	transition: background-color 0.15s ease, box-shadow 0.2s ease;
+}
+
+[component="category"] [component="category/topic"]:hover,
+[component="topics"] [component="category/topic"]:hover {
+	background-color: var(--lumina-panel-2);
+	box-shadow: inset 3px 0 0 var(--lumina-gold);
+}
+
+// Unread topic — gold left rail
+[component="category/topic"].unread,
+[component="topics"] [component="category/topic"].unread {
+	box-shadow: inset 3px 0 0 var(--lumina-gold-hi);
+}
+[component="category/topic"].unread .title,
+[component="category/topic"].unread a.topic-title {
+	color: var(--lumina-fg-gold);
+	font-weight: 600;
+}
+
+// Pinned / locked iconography
+[component="category/topic"] .topic-stat .fa-thumbtack,
+[component="category/topic"] .pinned-icon,
+[component="category/topic"] .fa-thumbtack {
+	color: var(--lumina-gold);
+	text-shadow: 0 0 10px rgba(212, 168, 75, 0.5);
+}
+[component="category/topic"] .fa-lock,
+[component="category/topic"] .locked-icon {
+	color: var(--lumina-shadow);
+}
+
+// Topic title link
+[component="category/topic"] a.topic-title,
+[component="category/topic"] .title a {
+	color: var(--lumina-fg);
+	font-family: var(--font-serif);
+	font-size: 1.05rem;
+	transition: color 0.15s ease, text-shadow 0.2s ease;
+}
+
+[component="category/topic"] a.topic-title:hover,
+[component="category/topic"] .title a:hover {
+	color: var(--lumina-gold-hi);
+	text-shadow: 0 0 12px rgba(245, 210, 122, 0.3);
+}
+
+// Author / timestamp / stats
+[component="category/topic"] .text-muted,
+[component="category/topic"] small,
+[component="category/topic"] .topic-stat {
+	color: var(--lumina-fg-dim) !important;
+	font-family: var(--font-serif);
+	font-style: italic;
+}
+
+// Tag pills inside topic rows
+.tag-list .tag,
+tag-item,
+.taglist .tag {
+	background-color: rgba(212, 168, 75, 0.08) !important;
+	color: var(--lumina-fg-gold) !important;
+	border: 1px solid var(--lumina-gold-dim) !important;
+	border-radius: 2px !important;
+	font-family: var(--font-display);
+	font-size: 0.7rem;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	padding: 2px 8px;
+}
+.tag-list .tag:hover {
+	background-color: rgba(212, 168, 75, 0.18) !important;
+	color: var(--lumina-gold-hi) !important;
+}
+
+// Topic header (inside a single thread)
+[component="topic"] .topic-header,
+[component="topic/header"],
+.topic-main-buttons {
+	background-color: transparent;
+}
+
+[component="topic"] h1,
+[component="topic"] .topic-title {
+	font-family: var(--font-display);
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--lumina-fg-gold);
+	background: linear-gradient(180deg, #8a6520 0%, #d4a84b 20%,
+		#f5d27a 60%, #fbe8b3 100%);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}

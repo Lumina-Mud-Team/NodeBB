@@ -1,0 +1,45 @@
+// Pull Cinzel + Crimson Text from Google Fonts. Same source the
+// public Lumina site uses, so the typography matches across
+// site → forum without diverging weights.
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
+
+body {
+	font-family: var(--font-body);
+	font-feature-settings: 'liga' 1, 'calt' 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+	font-family: var(--font-display);
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--lumina-fg-gold);
+}
+
+h1, .h1 { letter-spacing: 0.14em; }
+h4, h5, h6, .h4, .h5, .h6 { letter-spacing: 0.18em; }
+
+// Lumina "eyebrow" style — used on category headers
+.eyebrow,
+.text-uppercase.fw-bold {
+	font-family: var(--font-display);
+	letter-spacing: 0.32em;
+	color: var(--lumina-gold);
+}
+
+code, kbd, pre, samp, .font-monospace {
+	font-family: var(--font-mono);
+}
+
+// Italic blockquotes pick up the parchment voice from the site.
+blockquote {
+	font-family: var(--font-serif);
+	font-style: italic;
+	color: var(--lumina-fg-muted);
+	border-left: 2px solid var(--lumina-gold-dim);
+	padding-left: 1em;
+}
