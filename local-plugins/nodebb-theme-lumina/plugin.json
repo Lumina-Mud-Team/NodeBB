@@ -18,8 +18,6 @@
     "../client/account/theme.js": "../nodebb-theme-harmony/public/settings.js"
   },
   "staticDirs": {
-    "inter": "../nodebb-theme-harmony/node_modules/@fontsource/inter/files",
-    "poppins": "../nodebb-theme-harmony/node_modules/@fontsource/poppins/files",
     "static": "static"
   },
   "languages": "languages"

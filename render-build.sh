@@ -22,7 +22,8 @@ npm install --omit=dev
 # Install NodeBB plugins from npm registry.
 echo "===== Installing NodeBB plugins (npm) ====="
 npm install --omit=dev --no-save \
-  nodebb-plugin-sso-google
+  nodebb-plugin-sso-google \
+  nodebb-plugin-custom-pages
 echo "==========================================="
 
 # Symlink local plugins from local-plugins/ into node_modules/ so NodeBB sees them.
