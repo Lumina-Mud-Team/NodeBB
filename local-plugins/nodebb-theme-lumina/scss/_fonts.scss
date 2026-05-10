@@ -11,17 +11,17 @@ body {
 	text-rendering: optimizeLegibility;
 }
 
+// Headings: Cinzel + gold + tracking, MA NIENTE uppercase globale.
+// Le poche superfici dove vogliamo "title" all-caps (brand wordmark,
+// h1 del topic, category card titles, banner categoria) lo dichiarano
+// esplicitamente nei loro file. Per tutto il resto, mixed case.
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-family: var(--font-display);
 	font-weight: 600;
-	letter-spacing: 0.08em;
-	text-transform: uppercase;
+	letter-spacing: 0.04em;
 	color: var(--lumina-fg-gold);
 }
-
-h1, .h1 { letter-spacing: 0.14em; }
-h4, h5, h6, .h4, .h5, .h6 { letter-spacing: 0.18em; }
 
 // Lumina "eyebrow" style — used on category headers
 .eyebrow,

@@ -4,11 +4,8 @@
 .btn {
 	font-family: var(--font-display);
 	font-size: 1rem;
-	// Cinzel reads thin under uppercase+wide letter-spacing — push to
-	// bold/extra-bold so labels stay legible at small sizes.
 	font-weight: 700;
-	letter-spacing: 0.18em;
-	text-transform: uppercase;
+	letter-spacing: 0.04em;
 	border-radius: 3px;
 	transition: transform 0.15s ease, box-shadow 0.2s ease,
 		background-color 0.2s ease, border-color 0.2s ease,
@@ -108,7 +105,7 @@
 .btn-sm,
 .btn.btn-sm {
 	font-size: 1rem;
-	letter-spacing: 0.12em;
+	letter-spacing: 0.04em;
 	font-weight: 700;
 	padding: 5px 12px;
 }

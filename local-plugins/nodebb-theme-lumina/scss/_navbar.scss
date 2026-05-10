@@ -19,8 +19,7 @@ nav.navbar {
 .navbar .nav-link {
 	color: var(--lumina-fg-muted);
 	font-family: var(--font-display);
-	letter-spacing: 0.14em;
-	text-transform: uppercase;
+	letter-spacing: 0.04em;
 	font-size: 1rem;
 	transition: color 0.2s ease, text-shadow 0.25s ease;
 }
@@ -28,7 +27,7 @@ nav.navbar {
 .navbar .navbar-brand {
 	color: var(--lumina-fg-gold);
 	font-weight: 600;
-	letter-spacing: 0.24em;
+	letter-spacing: 0.06em;
 	text-shadow: 0 0 16px rgba(212, 168, 75, 0.25);
 }
 
