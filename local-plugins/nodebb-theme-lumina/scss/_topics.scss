@@ -57,12 +57,20 @@
 	color: var(--lumina-shadow);
 }
 
-// Topic title link
+// Topic title link — harmony lo rende come <h3>, e la regola globale
+// h1-h6 di _fonts.scss lo forzava a Cinzel uppercase. Qui override
+// esplicito: serif normale-case, niente letter-spacing.
 [component="category/topic"] a.topic-title,
-[component="category/topic"] .title a {
+[component="category/topic"] .title,
+[component="category/topic"] .title a,
+[component="category/topic"] h3,
+[component="category/topic"] [component="topic/header"] {
 	color: var(--lumina-fg);
 	font-family: var(--font-serif);
 	font-size: 1.05rem;
+	font-weight: 600;
+	text-transform: none;
+	letter-spacing: normal;
 	transition: color 0.15s ease, text-shadow 0.2s ease;
 }
 
