@@ -80,13 +80,37 @@
 	text-shadow: 0 0 12px rgba(245, 210, 122, 0.3);
 }
 
-// Author / timestamp / stats
+// Author / timestamp / stats — fg-muted (era fg-dim, troppo faded col body
+// scuro). Italic serif coerente con la "voice" del tema.
 [component="category/topic"] .text-muted,
 [component="category/topic"] small,
-[component="category/topic"] .topic-stat {
-	color: var(--lumina-fg-dim) !important;
+[component="category/topic"] .topic-stat,
+[component="category/topic"] .timeago {
+	color: var(--lumina-fg-muted) !important;
 	font-family: var(--font-serif);
 	font-style: italic;
+}
+
+// Topic-select checkbox (icona quadratino sotto avatar quando showSelect=true,
+// utenti admin). Harmony lo mette via .hover-visible che richiede un
+// .hover-parent ancestor — senza quello sta sempre visibile e penzola sotto
+// l'avatar. Lo nascondiamo finché non hover sull'avatar stesso.
+[component="category/topic"] .checkbox {
+	visibility: hidden;
+}
+[component="category/topic"] .item-img:hover .checkbox,
+[component="category/topic"]:hover .checkbox {
+	visibility: visible;
+}
+
+// Timestamp badge: harmony lo rende come .badge con border + padding,
+// che lo fa partire spostato a destra del titolo. Tolgo border/padding
+// del badge così si allinea col titolo sopra.
+[component="category/topic"] .timeago.badge {
+	border: 0 !important;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+	background: transparent !important;
 }
 
 // Tag pills inside topic rows.
