@@ -229,6 +229,12 @@
 	box-shadow: 0 0 14px var(--lumina-gold), 0 0 6px var(--lumina-gold) !important;
 }
 
+// Hide "Powered by NodeBB" footer widget (sidebar-footer area).
+// Iniettato da NodeBB core via widget; lo nascondiamo a livello CSS.
+#footer {
+	display: none !important;
+}
+
 // Reduced motion
 @media (prefers-reduced-motion: reduce) {
 	*,

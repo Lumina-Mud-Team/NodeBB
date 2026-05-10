@@ -1,5 +1,20 @@
 // Single post bodies inside a topic.
 
+// Topic posts-container: harmony lo blocca a 960px hard. Col container
+// allargato a 1480 lasciava un buco enorme tra post e right-rail
+// (DevTools mostrava il margin con strisce viola). Riportiamo a 100%
+// così i post riempono la loro col-lg-8.
+body.template-topic .topic .posts-container {
+	max-width: 100%;
+	width: 100%;
+}
+
+// Quick-reply box (form di risposta in fondo al topic) — padding-top
+// mancante faceva collare il textarea al bordo del box.
+.quick-reply {
+	padding-top: 1rem;
+}
+
 [component="post"],
 [component="topic"] .posts > li {
 	background-color: var(--lumina-panel);
