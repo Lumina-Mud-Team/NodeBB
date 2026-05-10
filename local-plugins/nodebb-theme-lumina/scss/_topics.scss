@@ -57,6 +57,12 @@
 	color: var(--lumina-shadow);
 }
 
+// Topic thumbnails strip: harmony lo apre nel topic.tpl come banner
+// di immagini sotto il titolo. Non ci serve, lo togliamo.
+[component="topic/thumb/list"] {
+	display: none !important;
+}
+
 // Right-rail "topic sidebar tools": harmony lo apre con width:170px
 // inline + Cinzel via .ff-secondary, e con i nostri 1rem le voci tipo
 // "Segna come letto" / "Strumenti per la discussione" troncavano.

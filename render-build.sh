@@ -41,6 +41,23 @@ else
 fi
 echo "================================="
 
+# Harmony declares staticDirs che puntano a "node_modules/@fontsource/<pkg>/files"
+# relativo alla sua dir, ma npm install hoista @fontsource al top-level. Senza
+# questi symlink i font 404 e console del browser si riempie di errori.
+echo "===== Linking @fontsource for harmony ====="
+mkdir -p node_modules/nodebb-theme-harmony/node_modules/@fontsource
+for pkg in inter poppins; do
+  src="$(pwd)/node_modules/@fontsource/$pkg"
+  dst="$(pwd)/node_modules/nodebb-theme-harmony/node_modules/@fontsource/$pkg"
+  if [ -d "$src" ] && [ ! -e "$dst" ]; then
+    ln -sfn "$src" "$dst"
+    echo "  linked @fontsource/$pkg"
+  else
+    echo "  skipped $pkg (src missing or dst exists)"
+  fi
+done
+echo "============================================"
+
 # Generate config.json from environment variables provided by Render.
 # Required env vars (set them in Render dashboard → Environment):
 #   URL, SECRET, MONGO_HOST, MONGO_PORT, MONGO_USER, MONGO_PASS, MONGO_DB
