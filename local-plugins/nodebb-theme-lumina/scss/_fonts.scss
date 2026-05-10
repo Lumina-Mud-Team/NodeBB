@@ -1,7 +1,7 @@
 // Pull Cinzel + Crimson Text from Google Fonts. Same source the
 // public Lumina site uses, so the typography matches across
 // site → forum without diverging weights.
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap');
 
 body {
 	font-family: var(--font-body);

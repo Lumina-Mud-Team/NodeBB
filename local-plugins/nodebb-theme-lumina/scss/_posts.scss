@@ -39,7 +39,7 @@ body.template-topic .topic .posts-container {
 // Post body content (markdown / WYSIWYG output)
 [component="post/content"],
 .post-content {
-	font-family: var(--font-serif);
+	font-family: var(--font-body);
 	font-size: 1.3125rem;
 	line-height: 1.7;
 	color: var(--lumina-fg);
