@@ -1,5 +1,32 @@
 // Category list (categories.tpl) and per-category header.
 
+// Widen the main container: Bootstrap's 1140px default leaves no breathing
+// room once you have larger type (21px base), Cinzel uppercase headings,
+// and the recent-posts widget eating the right rail. 1480px gives enough
+// space without stretching the eye on ultrawide monitors.
+.container-lg {
+	max-width: 1480px;
+}
+
+// Category counter cards (.meta.stats grid). Harmony renders TOPICS/POSTS
+// labels with .text-xs inside a narrow grid cell + overflow:hidden. With
+// our 1rem floor + Cinzel uppercase 0.16em spacing, "DISCUSSIONI" was
+// truncating to "SCUSSIONI". Drop the letter-spacing on these micro-labels
+// and let them overflow softly if a translation goes long.
+[component="categories/category"] .meta.stats .card-header {
+	overflow: visible;
+}
+[component="categories/category"] .meta.stats .card-header .text-xs,
+[component="categories/category"] .meta.stats .card-header span.text-lowercase {
+	letter-spacing: 0.02em;
+	font-family: var(--font-display);
+	color: var(--lumina-fg-muted);
+	// Eccezione consapevole alla regola ≥1rem: queste sono micro-label
+	// dentro una card stretta, vincono la leggibilità sì, ma la priorità
+	// è che "DISCUSSIONI" entri per intero. 0.8rem = 16.8px col base 21px.
+	font-size: 0.8rem !important;
+}
+
 [component="categories"] [component="categories/category"],
 [component="category/header"] {
 	background-color: var(--lumina-panel);
