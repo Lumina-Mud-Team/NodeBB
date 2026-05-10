@@ -7,7 +7,7 @@
 body {
 	// Surfaces
 	--lumina-ink: #05060b;
-	--lumina-bg: #f5f6f7;
+	--lumina-bg: #1b1b32;
 	--lumina-panel: #2a2c4a;
 	--lumina-panel-2: #353756;
 	--lumina-field: #15162a;
@@ -51,7 +51,7 @@ body {
 	// list-group, alerts, tables…) inherits Lumina automatically.
 	// ----------------------------------------------------------
 	--bs-body-bg: var(--lumina-bg);
-	--bs-body-bg-rgb: 245, 246, 247;
+	--bs-body-bg-rgb: 27, 27, 50;
 	--bs-body-color: var(--lumina-fg);
 	--bs-body-color-rgb: 232, 227, 212;
 
