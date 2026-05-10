@@ -1,0 +1,4 @@
+Templates inherited from baseTheme (nodebb-theme-harmony).
+
+Add files here only when you need to override a specific .tpl from harmony.
+NodeBB merges this folder over harmony's, so a file with the same path wins.

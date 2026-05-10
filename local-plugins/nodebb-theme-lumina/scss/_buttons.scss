@@ -1,0 +1,177 @@
+// Buttons. Bootstrap exposes color via CSS vars per variant —
+// the gold gradient here mirrors the public site's `.btn-primary`.
+
+.btn {
+	font-family: var(--font-display);
+	font-size: 1rem;
+	// Cinzel reads thin under uppercase+wide letter-spacing — push to
+	// bold/extra-bold so labels stay legible at small sizes.
+	font-weight: 700;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	border-radius: 3px;
+	transition: transform 0.15s ease, box-shadow 0.2s ease,
+		background-color 0.2s ease, border-color 0.2s ease,
+		color 0.2s ease;
+}
+
+// The .btn-primary gradient is dark-text-on-gold — push to extra-bold
+// so the label reads clearly against the bright gradient highlight.
+.btn-primary,
+.btn.btn-primary,
+.composer-trigger,
+.btn[data-action="new-topic"] {
+	font-weight: 800;
+}
+
+.btn:active,
+.btn.active {
+	transform: translateY(1px);
+}
+
+// Primary gold
+.btn-primary,
+.btn.btn-primary {
+	color: var(--lumina-ink);
+	background: linear-gradient(180deg,
+		var(--lumina-gold-hi) 0%,
+		var(--lumina-gold) 55%,
+		var(--lumina-gold-lo) 100%);
+	border: 1px solid var(--lumina-gold-lo);
+	box-shadow:
+		0 0 0 1px rgba(245, 210, 122, 0.25) inset,
+		0 12px 24px -12px rgba(212, 168, 75, 0.55),
+		0 0 40px -10px rgba(212, 168, 75, 0.28);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+	color: var(--lumina-ink);
+	background: linear-gradient(180deg,
+		var(--lumina-gold-hi) 0%,
+		var(--lumina-gold-hi) 55%,
+		var(--lumina-gold) 100%);
+	border-color: var(--lumina-gold);
+	box-shadow:
+		0 0 0 1px rgba(245, 210, 122, 0.45) inset,
+		0 18px 36px -12px rgba(245, 210, 122, 0.7),
+		0 0 70px -10px rgba(245, 210, 122, 0.45);
+}
+
+// Secondary / ghost
+.btn-secondary,
+.btn-outline-secondary,
+.btn.btn-light,
+.btn-outline-primary {
+	background: rgba(8, 9, 16, 0.7);
+	color: var(--lumina-fg-gold);
+	border: 1px solid var(--lumina-gold-dim);
+}
+
+.btn-secondary:hover,
+.btn-outline-secondary:hover,
+.btn-outline-primary:hover {
+	color: var(--lumina-gold-hi);
+	border-color: var(--lumina-gold);
+	background: rgba(212, 168, 75, 0.12);
+	box-shadow: 0 0 24px -8px rgba(212, 168, 75, 0.4);
+}
+
+.btn-link {
+	color: var(--lumina-fg-gold);
+	text-decoration: none;
+}
+.btn-link:hover {
+	color: var(--lumina-gold-hi);
+}
+
+// Danger (heretic palette)
+.btn-danger {
+	color: var(--lumina-ink);
+	background: linear-gradient(180deg,
+		var(--lumina-shadow-hi) 0%,
+		var(--lumina-shadow) 55%,
+		var(--lumina-shadow-lo) 100%);
+	border: 1px solid var(--lumina-shadow-lo);
+	box-shadow:
+		0 0 0 1px rgba(232, 184, 175, 0.25) inset,
+		0 12px 24px -12px var(--lumina-shadow-glow);
+}
+
+.btn-success {
+	color: var(--lumina-ink);
+	background: var(--lumina-success);
+	border: 1px solid #4fa84a;
+}
+
+// Small / icon-only buttons in toolbars
+.btn-sm,
+.btn.btn-sm {
+	font-size: 1rem;
+	letter-spacing: 0.12em;
+	font-weight: 700;
+	padding: 5px 12px;
+}
+
+// Primary gradient buttons MUST stay extra-bold even when also .btn-sm
+// AND when carrying Bootstrap's `fw-semibold` / `fw-normal` utilities,
+// which ship with `!important` and would otherwise win. Hence the
+// `!important` here — it's intentionally stronger than the utility
+// classes harmony's templates apply (e.g. the topic Reply button is
+// `btn btn-sm btn-primary fw-semibold`).
+.btn.btn-primary,
+.btn-primary.btn-sm,
+.btn.btn-primary.btn-sm,
+.composer-trigger,
+.btn[data-action="new-topic"],
+#new_topic,
+[component="topic/reply"],
+[component="topic/quickreply/button"],
+[component="topic/reply/locked"],
+[component="topic/reply/guest"] {
+	font-weight: 800 !important;
+	letter-spacing: 0.14em;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+// Catch-all: any .btn carrying Bootstrap's font-weight utility classes
+// while also being one of our gradient/branded variants stays bold.
+.btn.btn-primary.fw-semibold,
+.btn.btn-primary.fw-normal,
+.btn.btn-primary.fw-light,
+.btn.btn-primary.fw-medium {
+	font-weight: 800 !important;
+}
+
+// Ghost / outline buttons in toolbars (post tools: reply, quote, share,
+// bookmark) inherit `.btn` weight 700 — but they often carry only an
+// icon. When they do carry text, keep them bold and readable too.
+.btn.btn-ghost,
+.btn-ghost.btn-sm {
+	font-weight: 700 !important;
+	color: var(--lumina-fg-muted);
+}
+.btn.btn-ghost:hover,
+.btn-ghost.btn-sm:hover {
+	color: var(--lumina-gold-hi);
+	background: rgba(212, 168, 75, 0.08);
+}
+
+// Disabled state
+.btn:disabled,
+.btn.disabled {
+	opacity: 0.45;
+	box-shadow: none;
+	cursor: not-allowed;
+}
+
+// "New topic" floating action — Harmony renders it as a floating
+// composer button in the bottom-right; treat it as the primary brand.
+.composer-trigger,
+.btn[data-action="new-topic"],
+[component="composer"] .btn-primary {
+	box-shadow:
+		0 0 0 1px rgba(245, 210, 122, 0.35) inset,
+		0 18px 36px -10px rgba(212, 168, 75, 0.55),
+		0 0 60px -10px rgba(245, 210, 122, 0.35);
+}

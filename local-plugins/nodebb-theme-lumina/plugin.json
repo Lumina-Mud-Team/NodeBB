@@ -1,0 +1,26 @@
+{
+  "id": "nodebb-theme-lumina",
+  "hooks": [
+    { "hook": "static:app.load", "method": "init" },
+    { "hook": "filter:admin.header.build", "method": "addAdminNavigation" },
+    { "hook": "filter:widgets.getAreas", "method": "defineWidgetAreas" },
+    { "hook": "filter:config.get", "method": "getThemeConfig" },
+    { "hook": "filter:settings.get", "method": "getAdminSettings" },
+    { "hook": "filter:user.saveSettings", "method": "saveUserSettings" },
+    { "hook": "filter:user.profileMenu", "method": "addProfileItem" },
+    { "hook": "filter:middleware.renderHeader", "method": "filterMiddlewareRenderHeader" }
+  ],
+  "scripts": [
+    "../nodebb-theme-harmony/public/harmony.js"
+  ],
+  "modules": {
+    "../admin/plugins/harmony.js": "../nodebb-theme-harmony/public/admin.js",
+    "../client/account/theme.js": "../nodebb-theme-harmony/public/settings.js"
+  },
+  "staticDirs": {
+    "inter": "../nodebb-theme-harmony/node_modules/@fontsource/inter/files",
+    "poppins": "../nodebb-theme-harmony/node_modules/@fontsource/poppins/files",
+    "static": "static"
+  },
+  "languages": "languages"
+}

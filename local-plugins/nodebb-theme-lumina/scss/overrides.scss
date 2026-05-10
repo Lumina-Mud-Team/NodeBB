@@ -1,0 +1,113 @@
+// SASS variable overrides for Bootstrap 5 — applied at compile time
+// before BS variables/maps/utilities are resolved.
+//
+// CSS custom properties live in _tokens.scss (runtime). $vars here
+// drive things Bootstrap bakes at build time:
+//   - color-contrast() picks for `text-bg-*` utilities
+//   - emitted utility classes (bg-primary, border-warning, etc.)
+//   - default form/border colors that aren't fully CSS-var-driven
+// Keep both layers in sync.
+
+// ---- Lumina palette ----
+$lumina-ink:        #05060b;
+$lumina-bg:         #1b1b32;
+$lumina-panel:      #2a2c4a;
+$lumina-panel-2:    #353756;
+$lumina-field:      #15162a;
+$lumina-border:     #4a4c70;
+$lumina-border-soft:#2f314f;
+
+$lumina-gold:       #d4a84b;
+$lumina-gold-hi:    #f5d27a;
+$lumina-gold-lo:    #9a7624;
+$lumina-gold-dim:   #6e5318;
+
+$lumina-shadow:     #d9928a;
+$lumina-shadow-lo:  #b86a5c;
+
+$lumina-fg:         #e8e3d4;
+$lumina-fg-muted:   #b6ae98;
+$lumina-fg-dim:     #7a735e;
+$lumina-fg-gold:    #e6c573;
+
+$lumina-success:    #6dda68;
+$lumina-danger:     #fe6442;
+$lumina-info:       #5dc4ff;
+
+// ---- Bootstrap grayscale (re-mapped to dark) ----
+// Bootstrap derives a lot from $gray-*; flipping these makes any
+// component we don't explicitly touch land closer to the dark theme.
+$white:    $lumina-fg !default;
+$gray-100: #1a1d35 !default;
+$gray-200: $lumina-panel-2 !default;
+$gray-300: $lumina-border !default;
+$gray-400: #2a2e4d !default;
+$gray-500: $lumina-fg-dim !default;
+$gray-600: $lumina-fg-muted !default;
+$gray-700: $lumina-fg !default;
+$gray-800: $lumina-fg-gold !default;
+$gray-900: #fff !default;
+$black:    $lumina-ink !default;
+
+// ---- Brand color slots ----
+$blue:    $lumina-info !default;
+$red:     $lumina-danger !default;
+$yellow:  $lumina-gold-hi !default;
+$green:   $lumina-success !default;
+$cyan:    $lumina-info !default;
+
+$primary:   $lumina-gold !default;
+$secondary: $lumina-fg-muted !default;
+$success:   $lumina-success !default;
+$info:      $lumina-info !default;
+$warning:   $lumina-gold-hi !default;
+$danger:    $lumina-danger !default;
+$light:     $lumina-panel-2 !default;
+$dark:      $lumina-ink !default;
+
+// ---- Body / surfaces ----
+$body-color:        $lumina-fg !default;
+$body-bg:           $lumina-bg !default;
+$body-secondary-color: $lumina-fg-muted !default;
+$body-secondary-bg: $lumina-panel !default;
+$body-tertiary-color:  $lumina-fg-dim !default;
+$body-tertiary-bg:  $lumina-panel-2 !default;
+
+$text-muted:        $lumina-fg-dim !default;
+$border-color:      $lumina-border !default;
+$link-color:        $lumina-fg-gold !default;
+$link-hover-color:  $lumina-gold-hi !default;
+$link-decoration:   none !default;
+$link-hover-decoration: none !default;
+
+// ---- Form bits ----
+$form-check-input-border: var(--bs-border-width) solid $lumina-border !default;
+$input-bg:                $lumina-field !default;
+$input-color:             $lumina-fg !default;
+$input-border-color:      $lumina-border !default;
+$input-placeholder-color: $lumina-fg-dim !default;
+$input-focus-border-color: $lumina-gold-dim !default;
+
+// ---- Behaviour ----
+$enable-caret:          false;
+$enable-smooth-scroll:  false;
+$enable-shadows:        true;
+$enable-rounded:        true;
+
+// ---- Typography ----
+$font-family-sans-serif: "Crimson Text", Georgia, "Times New Roman", serif;
+$font-family-secondary:  "Cinzel", "Trajan Pro", serif !default;
+$headings-font-family:   "Cinzel", "Trajan Pro", serif !default;
+$headings-font-weight:   600 !default;
+$headings-color:         $lumina-fg-gold !default;
+$font-weight-semibold:   500 !default;
+// Match lumina-site --font-size-prose (21px) — forum is reading-heavy,
+// so we use the prose size as base. 1.3125rem = 21px at 16px root.
+$font-size-base:         1.3125rem !default;
+$small-font-size:        1rem !default;
+
+// ---- Breadcrumbs (mirrors Lumina rune separator) ----
+$breadcrumb-divider: quote("◆");
+$breadcrumb-divider-color: $lumina-gold-dim !default;
+$breadcrumb-active-color:  $lumina-fg-gold !default;
+$breadcrumb-item-padding-x: 12px !default;

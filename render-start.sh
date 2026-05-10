@@ -53,7 +53,8 @@ else
   mkdir -p "$UPLOADS"
 fi
 
-echo "##### render-start.sh END — launching node app.js (single-process mode) #####"
-# loader.js spawns workers with silent:true, hiding all real logs from Render.
-# app.js is the actual NodeBB server — single process, logs straight to stdout.
-exec node app.js
+echo "##### render-start.sh END — launching node loader.js (supervisor + worker) #####"
+# Use loader.js so the ACP "Rebuild & Restart" button works (it signals the
+# supervisor to recycle workers). render-build.sh writes "silent": false in
+# config.json, so worker logs still reach Render's stdout.
+exec node loader.js

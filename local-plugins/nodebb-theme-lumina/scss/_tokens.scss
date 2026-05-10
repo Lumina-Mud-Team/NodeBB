@@ -1,0 +1,193 @@
+// Lumina design tokens. Mirrors lumina-site/src/styles/tokens.css 1:1.
+// Every variable is exposed twice:
+//  - as `--lumina-*` so component code can read it directly
+//  - as `--bs-*` (Bootstrap 5) so the whole tree recolors for free
+
+:root,
+body {
+	// Surfaces
+	--lumina-ink: #05060b;
+	--lumina-bg: #1b1b32;
+	--lumina-panel: #2a2c4a;
+	--lumina-panel-2: #353756;
+	--lumina-field: #15162a;
+	--lumina-border: #4a4c70;
+	--lumina-border-soft: #2f314f;
+
+	// Gold (primary action / brand)
+	--lumina-gold: #d4a84b;
+	--lumina-gold-hi: #f5d27a;
+	--lumina-gold-lo: #9a7624;
+	--lumina-gold-dim: #6e5318;
+	--lumina-gold-glow: rgba(212, 168, 75, 0.35);
+
+	// Shadow / heretic palette (errors, danger accents)
+	--lumina-shadow: #d9928a;
+	--lumina-shadow-hi: #e8b8af;
+	--lumina-shadow-lo: #b86a5c;
+	--lumina-shadow-glow: rgba(170, 80, 70, 0.5);
+
+	// Foreground
+	--lumina-fg: #e8e3d4;
+	--lumina-fg-muted: #b6ae98;
+	--lumina-fg-dim: #7a735e;
+	--lumina-fg-gold: #e6c573;
+
+	// Status accents
+	--lumina-success: #6dda68;
+	--lumina-danger: #fe6442;
+	--lumina-info: #5dc4ff;
+	--lumina-rare: #cf25df;
+
+	// Typography stacks
+	--font-display: 'Cinzel', 'Trajan Pro', serif;
+	--font-serif: 'Crimson Text', Georgia, serif;
+	--font-body: 'Crimson Text', Georgia, serif;
+	--font-mono: ui-monospace, 'JetBrains Mono', Consolas, monospace;
+
+	// ----------------------------------------------------------
+	// Bridge: rewrite Bootstrap CSS variables so every BS5
+	// component (cards, modals, dropdowns, forms, pagination,
+	// list-group, alerts, tables…) inherits Lumina automatically.
+	// ----------------------------------------------------------
+	--bs-body-bg: var(--lumina-bg);
+	--bs-body-bg-rgb: 27, 27, 50;
+	--bs-body-color: var(--lumina-fg);
+	--bs-body-color-rgb: 232, 227, 212;
+
+	--bs-emphasis-color: var(--lumina-fg-gold);
+	--bs-emphasis-color-rgb: 230, 197, 115;
+	--bs-heading-color: var(--lumina-fg-gold);
+
+	--bs-secondary-color: var(--lumina-fg-muted);
+	--bs-secondary-color-rgb: 182, 174, 152;
+	--bs-secondary-bg: var(--lumina-panel);
+	--bs-secondary-bg-rgb: 42, 44, 74;
+
+	--bs-tertiary-color: var(--lumina-fg-dim);
+	--bs-tertiary-bg: var(--lumina-panel-2);
+	--bs-tertiary-bg-rgb: 53, 55, 86;
+
+	--bs-border-color: var(--lumina-border);
+	--bs-border-color-translucent: rgba(31, 35, 64, 0.55);
+
+	--bs-link-color: var(--lumina-fg-gold);
+	--bs-link-color-rgb: 230, 197, 115;
+	--bs-link-hover-color: var(--lumina-gold-hi);
+	--bs-link-hover-color-rgb: 245, 210, 122;
+
+	--bs-primary: var(--lumina-gold);
+	--bs-primary-rgb: 212, 168, 75;
+	--bs-primary-bg-subtle: rgba(212, 168, 75, 0.12);
+	--bs-primary-text-emphasis: var(--lumina-gold-hi);
+	--bs-primary-border-subtle: var(--lumina-gold-dim);
+
+	--bs-secondary: var(--lumina-fg-muted);
+	--bs-secondary-rgb: 182, 174, 152;
+
+	--bs-success: var(--lumina-success);
+	--bs-success-rgb: 109, 218, 104;
+	--bs-info: var(--lumina-info);
+	--bs-info-rgb: 93, 196, 255;
+	--bs-warning: var(--lumina-gold-hi);
+	--bs-warning-rgb: 245, 210, 122;
+	--bs-danger: var(--lumina-danger);
+	--bs-danger-rgb: 254, 100, 66;
+
+	--bs-light: var(--lumina-panel-2);
+	--bs-light-rgb: 23, 26, 48;
+	--bs-dark: var(--lumina-ink);
+	--bs-dark-rgb: 5, 6, 11;
+
+	// Forms / inputs
+	--bs-form-control-bg: var(--lumina-field);
+	--bs-form-control-color: var(--lumina-fg);
+	--bs-form-valid-color: var(--lumina-success);
+	--bs-form-invalid-color: var(--lumina-danger);
+
+	// Bootstrap also derives `card-bg`, `dropdown-bg`, `modal-bg`
+	// from their own scoped vars; rewrite those too for full reach.
+	--bs-card-bg: var(--lumina-panel);
+	--bs-card-color: var(--lumina-fg);
+	--bs-card-border-color: var(--lumina-border);
+	--bs-card-cap-bg: var(--lumina-panel-2);
+	--bs-card-cap-color: var(--lumina-fg-gold);
+
+	--bs-dropdown-bg: var(--lumina-panel);
+	--bs-dropdown-color: var(--lumina-fg);
+	--bs-dropdown-border-color: var(--lumina-border);
+	--bs-dropdown-link-color: var(--lumina-fg);
+	--bs-dropdown-link-hover-color: var(--lumina-fg-gold);
+	--bs-dropdown-link-hover-bg: rgba(212, 168, 75, 0.08);
+	--bs-dropdown-link-active-color: var(--lumina-ink);
+	--bs-dropdown-link-active-bg: var(--lumina-gold);
+	--bs-dropdown-divider-bg: var(--lumina-border);
+	--bs-dropdown-header-color: var(--lumina-fg-dim);
+
+	--bs-modal-bg: var(--lumina-panel);
+	--bs-modal-color: var(--lumina-fg);
+	--bs-modal-border-color: var(--lumina-border);
+	--bs-modal-header-border-color: var(--lumina-border);
+	--bs-modal-footer-border-color: var(--lumina-border);
+
+	--bs-toast-bg: rgba(17, 20, 39, 0.95);
+	--bs-toast-color: var(--lumina-fg);
+	--bs-toast-border-color: var(--lumina-border);
+	--bs-toast-header-bg: var(--lumina-panel-2);
+	--bs-toast-header-color: var(--lumina-fg-gold);
+
+	--bs-list-group-bg: var(--lumina-panel);
+	--bs-list-group-color: var(--lumina-fg);
+	--bs-list-group-border-color: var(--lumina-border);
+	--bs-list-group-action-color: var(--lumina-fg);
+	--bs-list-group-action-hover-color: var(--lumina-fg-gold);
+	--bs-list-group-action-hover-bg: rgba(212, 168, 75, 0.06);
+	--bs-list-group-action-active-color: var(--lumina-ink);
+	--bs-list-group-action-active-bg: var(--lumina-gold);
+
+	--bs-pagination-bg: transparent;
+	--bs-pagination-color: var(--lumina-fg-muted);
+	--bs-pagination-border-color: var(--lumina-border);
+	--bs-pagination-hover-bg: rgba(212, 168, 75, 0.08);
+	--bs-pagination-hover-color: var(--lumina-fg-gold);
+	--bs-pagination-hover-border-color: var(--lumina-gold-dim);
+	--bs-pagination-active-bg: var(--lumina-gold);
+	--bs-pagination-active-color: var(--lumina-ink);
+	--bs-pagination-active-border-color: var(--lumina-gold-lo);
+	--bs-pagination-disabled-bg: transparent;
+	--bs-pagination-disabled-color: var(--lumina-fg-dim);
+	--bs-pagination-disabled-border-color: var(--lumina-border-soft);
+
+	--bs-table-bg: transparent;
+	--bs-table-color: var(--lumina-fg);
+	--bs-table-border-color: var(--lumina-border);
+	--bs-table-striped-bg: rgba(255, 255, 255, 0.02);
+	--bs-table-hover-bg: rgba(212, 168, 75, 0.04);
+
+	--bs-progress-bg: var(--lumina-panel-2);
+	--bs-progress-bar-color: var(--lumina-ink);
+	--bs-progress-bar-bg: var(--lumina-gold);
+
+	--bs-popover-bg: var(--lumina-panel);
+	--bs-popover-border-color: var(--lumina-border);
+	--bs-popover-header-bg: var(--lumina-panel-2);
+	--bs-popover-header-color: var(--lumina-fg-gold);
+	--bs-popover-body-color: var(--lumina-fg);
+	--bs-popover-arrow-border: var(--lumina-border);
+
+	--bs-tooltip-bg: var(--lumina-ink);
+	--bs-tooltip-color: var(--lumina-fg);
+
+	--bs-nav-tabs-border-color: var(--lumina-border);
+	--bs-nav-tabs-link-active-color: var(--lumina-fg-gold);
+	--bs-nav-tabs-link-active-bg: var(--lumina-panel);
+	--bs-nav-tabs-link-active-border-color: var(--lumina-border) var(--lumina-border) var(--lumina-panel);
+	--bs-nav-pills-link-active-bg: var(--lumina-gold);
+	--bs-nav-pills-link-active-color: var(--lumina-ink);
+
+	// Lumina shadows
+	--shadow-panel: 0 24px 60px -20px rgba(0, 0, 0, 0.8),
+		0 2px 0 rgba(212, 168, 75, 0.05) inset;
+	--shadow-gold: 0 0 0 1px rgba(212, 168, 75, 0.35),
+		0 8px 24px -6px rgba(212, 168, 75, 0.25);
+}

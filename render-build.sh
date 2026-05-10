@@ -111,7 +111,7 @@ echo "=============================="
 
 # Set active theme (idempotent — no-op if already active).
 echo "===== Setting active theme ====="
-./nodebb reset -t nodebb-theme-harmony || echo "  (theme reset failed, check logs)"
+./nodebb reset -t nodebb-theme-lumina || echo "  (theme reset failed, check logs)"
 echo "================================"
 
 # Build NodeBB assets (templates, JS bundles, CSS).
