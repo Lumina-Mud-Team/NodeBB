@@ -53,8 +53,10 @@ else
   mkdir -p "$UPLOADS"
 fi
 
-echo "##### render-start.sh END — launching node loader.js (supervisor + worker) #####"
-# Use loader.js so the ACP "Rebuild & Restart" button works (it signals the
-# supervisor to recycle workers). render-build.sh writes "silent": false in
-# config.json, so worker logs still reach Render's stdout.
-exec node loader.js
+echo "##### render-start.sh END — launching node app.js (single-process mode) #####"
+# Reverted to app.js after loader.js exited immediately on Render
+# ("Application exited early"). Likely needs different process semantics
+# than what Render's single-tenant container provides — investigate before
+# trying loader.js again. Trade-off: ACP "Rebuild & Restart" button does
+# not work with app.js (no supervisor to receive the signal).
+exec node app.js
