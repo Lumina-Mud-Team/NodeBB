@@ -57,6 +57,22 @@
 	color: var(--lumina-shadow);
 }
 
+// Right-rail "topic sidebar tools": harmony lo apre con width:170px
+// inline + Cinzel via .ff-secondary, e con i nostri 1rem le voci tipo
+// "Segna come letto" / "Strumenti per la discussione" troncavano.
+// Qui: allargo a 220px + forza body font + size normale.
+.topic-sidebar-tools {
+	width: 220px !important;
+}
+.topic-sidebar-tools .btn,
+.topic-sidebar-tools .btn.ff-secondary,
+.topic-sidebar-tools .btn-ghost {
+	font-family: var(--font-body) !important;
+	font-size: 1rem !important;
+	letter-spacing: normal !important;
+	font-weight: 500;
+}
+
 // Topic title link — harmony lo rende come <h3>, e la regola globale
 // h1-h6 di _fonts.scss lo forzava a Cinzel uppercase. Qui override
 // esplicito: serif normale-case, niente letter-spacing.

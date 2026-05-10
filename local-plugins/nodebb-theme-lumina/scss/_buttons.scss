@@ -35,10 +35,7 @@
 		var(--lumina-gold) 55%,
 		var(--lumina-gold-lo) 100%);
 	border: 1px solid var(--lumina-gold-lo);
-	box-shadow:
-		0 0 0 1px rgba(245, 210, 122, 0.25) inset,
-		0 12px 24px -12px rgba(212, 168, 75, 0.55),
-		0 0 40px -10px rgba(212, 168, 75, 0.28);
+	box-shadow: 0 0 0 1px rgba(245, 210, 122, 0.25) inset;
 }
 
 .btn-primary:hover,
@@ -49,10 +46,7 @@
 		var(--lumina-gold-hi) 55%,
 		var(--lumina-gold) 100%);
 	border-color: var(--lumina-gold);
-	box-shadow:
-		0 0 0 1px rgba(245, 210, 122, 0.45) inset,
-		0 18px 36px -12px rgba(245, 210, 122, 0.7),
-		0 0 70px -10px rgba(245, 210, 122, 0.45);
+	box-shadow: 0 0 0 1px rgba(245, 210, 122, 0.45) inset;
 }
 
 // Secondary / ghost
@@ -162,13 +156,9 @@
 	cursor: not-allowed;
 }
 
-// "New topic" floating action — Harmony renders it as a floating
-// composer button in the bottom-right; treat it as the primary brand.
+// "New topic" floating action — solo highlight inset, niente glow esterno.
 .composer-trigger,
 .btn[data-action="new-topic"],
 [component="composer"] .btn-primary {
-	box-shadow:
-		0 0 0 1px rgba(245, 210, 122, 0.35) inset,
-		0 18px 36px -10px rgba(212, 168, 75, 0.55),
-		0 0 60px -10px rgba(245, 210, 122, 0.35);
+	box-shadow: 0 0 0 1px rgba(245, 210, 122, 0.35) inset;
 }
