@@ -1,5 +1,25 @@
 // Topic list rows (recent.tpl, unread.tpl, category.tpl, popular.tpl).
 
+// Topic row stats: la grid ha 3 celle (votes / post / views) dentro col-6
+// del col-lg-5, quindi ~80-100px per cella. Label come "VISUALIZZAZIONI"
+// (14 char) non ci sta a nessuna dimensione di Cinzel ragionevole.
+// Soluzione: nascondi il testo, forza visibile l'icona FA che harmony
+// renderizza sempre nel template ma nasconde su XL.
+[component="category/topic"] .meta.stats .card-header .text-xs.text-lowercase,
+[component="category/topic"] .meta.stats .card-header span.text-lowercase {
+	display: none !important;
+}
+[component="category/topic"] .meta.stats .card-header i.d-xl-none {
+	display: inline-block !important;
+	font-size: 0.95rem;
+	color: var(--lumina-fg-dim);
+	margin-top: 2px;
+}
+[component="category/topic"] .meta.stats .card-header {
+	overflow: visible;
+}
+
+
 [component="category"] [component="category/topic"],
 [component="topics"] [component="category/topic"],
 .topic-row {
