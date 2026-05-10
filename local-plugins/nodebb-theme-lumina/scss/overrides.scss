@@ -101,9 +101,10 @@ $headings-font-family:   "Cinzel", "Trajan Pro", serif !default;
 $headings-font-weight:   600 !default;
 $headings-color:         $lumina-fg-gold !default;
 $font-weight-semibold:   500 !default;
-// Match lumina-site --font-size-prose (21px) — forum is reading-heavy,
-// so we use the prose size as base. 1.3125rem = 21px at 16px root.
-$font-size-base:         1.3125rem !default;
+// Inter reading-comfortable size (18px, Medium-like). 21px era pensato
+// per Crimson Text serif (legge più piccolo a parità di px); con Inter
+// sans-serif gli stessi 21px sembrano oversized. 1.125rem = 18px.
+$font-size-base:         1.125rem !default;
 $small-font-size:        1rem !default;
 
 // ---- Breadcrumbs (mirrors Lumina rune separator) ----
