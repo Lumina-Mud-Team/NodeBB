@@ -59,13 +59,12 @@
 	color: var(--lumina-fg-gold);
 }
 
-// Description text in italic serif. text-transform/letter-spacing
+// Description text. Body font, non-italic — l'utente vuole evitare
+// l'italico (era serif Crimson italic). text-transform/letter-spacing
 // reset esplicito perché eredita da wrapper .subcategory (vedi sotto).
 [component="categories"] [component="categories/category"] .description,
 [component="categories"] [component="categories/category"] p,
 .description {
-	font-family: var(--font-serif);
-	font-style: italic;
 	color: var(--lumina-fg-muted);
 	text-transform: none;
 	letter-spacing: normal;
