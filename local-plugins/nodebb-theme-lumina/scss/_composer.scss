@@ -11,14 +11,19 @@
 		inset 0 1px 0 rgba(245, 210, 122, 0.04);
 }
 
+// Title input: usiamo Inter (non Cinzel) perché Cinzel ha solo glifi
+// maiuscoli — l'utente digiterebbe "Mercante" e vedrebbe "MERCANTE".
+// Qui vince la fedeltà al testo dell'utente sull'estetica fantasy.
 .composer .topic-title,
 .composer input.title,
 .composer .title-container input {
 	background-color: var(--lumina-field);
 	color: var(--lumina-fg-gold);
 	border: 1px solid var(--lumina-border);
-	font-family: var(--font-display);
-	letter-spacing: 0.02em;
+	font-family: var(--font-body);
+	font-weight: 500;
+	letter-spacing: normal;
+	text-transform: none;
 }
 
 .composer textarea,

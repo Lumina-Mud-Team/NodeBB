@@ -43,11 +43,9 @@ code, kbd, pre, samp, .font-monospace {
 .text-xs,
 .text-sm { font-size: 1rem !important; }
 
-// Italic blockquotes pick up the parchment voice from the site.
+// Blockquotes keep the body font/colour; only italic + gold rule mark them.
 blockquote {
-	font-family: var(--font-serif);
 	font-style: italic;
-	color: var(--lumina-fg-muted);
 	border-left: 2px solid var(--lumina-gold-dim);
 	padding-left: 1em;
 }

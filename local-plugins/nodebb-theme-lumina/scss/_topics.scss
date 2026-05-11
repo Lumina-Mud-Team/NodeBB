@@ -103,14 +103,34 @@
 }
 
 // Author / timestamp / stats — fg-muted (era fg-dim, troppo faded col body
-// scuro). Italic serif coerente con la "voice" del tema.
+// scuro). Inter regolare: il serif italic faceva sembrare il timestamp
+// una citazione e perdeva leggibilità a small size.
 [component="category/topic"] .text-muted,
 [component="category/topic"] small,
 [component="category/topic"] .topic-stat,
 [component="category/topic"] .timeago {
 	color: var(--lumina-fg-muted) !important;
-	font-family: var(--font-serif);
-	font-style: italic;
+	font-family: var(--font-body);
+	font-style: normal;
+}
+// La regola sopra ha specificità 0,2,0 e batte il `.fa` (0,1,0) di
+// Font Awesome: senza questo override, gli `<i>` delle stat (vote/post/
+// views) e il checkbox sotto l'avatar perdono il font FA e mostrano
+// quadratini al posto dei glifi. Ripristiniamo esplicitamente.
+[component="category/topic"] i.fa,
+[component="category/topic"] i.fas,
+[component="category/topic"] i.far,
+[component="category/topic"] i.fal,
+[component="category/topic"] i.fab,
+[component="category/topic"] i.fa-solid,
+[component="category/topic"] i.fa-regular,
+[component="category/topic"] i.fa-light,
+[component="category/topic"] i.fa-brands,
+[component="category/topic"] .topic-stat i,
+[component="category/topic"] .checkbox i,
+[component="category/topic"] [component="topic/select"] {
+	font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands',
+		'FontAwesome' !important;
 }
 
 // Topic-select checkbox (icona quadratino sotto avatar quando showSelect=true,
@@ -121,8 +141,34 @@
 	visibility: hidden;
 }
 [component="category/topic"] .item-img:hover .checkbox,
-[component="category/topic"]:hover .checkbox {
+[component="category/topic"]:hover .checkbox,
+[component="category/topic"].selected .checkbox {
 	visibility: visible;
+}
+
+// Stato "selected": harmony usa `.fa-check-square-o` (FA6 `square-check` via
+// v4-shims) + colore $success. A ~14px sul nostro pannello scuro il check
+// del glifo è quasi invisibile — l'utente vedeva solo un bordo verde.
+// Soluzione: tile dorata piena con un FA `check` (\f00c) centrato dentro,
+// così "selezionato" si legge senza ambiguità.
+[component="category/topic"] [component="topic/select"].fa-check-square-o {
+	color: var(--lumina-ink) !important;
+	background: var(--lumina-gold);
+	border: 1px solid var(--lumina-gold-lo);
+	border-radius: 2px;
+	width: 1.15em;
+	height: 1.15em;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1;
+	padding: 0;
+}
+[component="category/topic"] [component="topic/select"].fa-check-square-o::before {
+	content: "\f00c" !important;
+	font-size: 0.78em;
+	color: var(--lumina-ink);
+	font-weight: 900;
 }
 
 // Timestamp badge: harmony lo rende come .badge con border + padding,
