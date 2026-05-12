@@ -20,16 +20,17 @@ cp install/package.json package.json
 npm install --omit=dev
 
 # Install NodeBB plugins from npm registry.
-# reactions is published scoped as @nodebb/nodebb-plugin-reactions; install via
-# npm alias so it lands in node_modules/nodebb-plugin-reactions/ directly
-# (NodeBB scans node_modules/nodebb-plugin-* and a symlink with absolute pwd
-# is fragile across Render container restarts).
+# NodeBB v4 supports scoped packages natively (scans both node_modules/nodebb-plugin-*
+# and node_modules/@*/nodebb-plugin-*), so install reactions at its real scoped
+# path. The npm alias trick is wrong: it lands the package under an unscoped
+# directory but the inner package.json still says "@nodebb/...", so NodeBB tries
+# to read files from the scoped path that doesn't exist → ENOENT.
 echo "===== Installing NodeBB plugins (npm) ====="
 npm install --omit=dev --no-save \
   nodebb-plugin-sso-google \
   nodebb-plugin-custom-pages \
   nodebb-plugin-emoji \
-  nodebb-plugin-reactions@npm:@nodebb/nodebb-plugin-reactions
+  @nodebb/nodebb-plugin-reactions
 echo "==========================================="
 
 # Symlink local plugins from local-plugins/ into node_modules/ so NodeBB sees them.
@@ -130,7 +131,9 @@ echo "======================================"
 echo "===== Activating plugins ====="
 ./nodebb activate nodebb-plugin-sso-google || echo "  (sso-google activation failed, check logs)"
 ./nodebb activate nodebb-plugin-emoji || echo "  (emoji activation failed, check logs)"
-./nodebb activate nodebb-plugin-reactions || echo "  (reactions activation failed, check logs)"
+# reactions stored in Mongo plugins:active under its package.json name (scoped).
+# Use the scoped name to keep Mongo state and node_modules path in sync.
+./nodebb activate @nodebb/nodebb-plugin-reactions || echo "  (reactions activation failed, check logs)"
 # nodebb-plugin-lumina-game-link rimosso 2026-05-04 (non più desiderato)
 ./nodebb deactivate nodebb-plugin-lumina-game-link 2>/dev/null || true
 echo "=============================="
