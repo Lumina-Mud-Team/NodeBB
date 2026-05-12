@@ -20,24 +20,17 @@ cp install/package.json package.json
 npm install --omit=dev
 
 # Install NodeBB plugins from npm registry.
+# reactions is published scoped as @nodebb/nodebb-plugin-reactions; install via
+# npm alias so it lands in node_modules/nodebb-plugin-reactions/ directly
+# (NodeBB scans node_modules/nodebb-plugin-* and a symlink with absolute pwd
+# is fragile across Render container restarts).
 echo "===== Installing NodeBB plugins (npm) ====="
 npm install --omit=dev --no-save \
   nodebb-plugin-sso-google \
   nodebb-plugin-custom-pages \
   nodebb-plugin-emoji \
-  @nodebb/nodebb-plugin-reactions
+  nodebb-plugin-reactions@npm:@nodebb/nodebb-plugin-reactions
 echo "==========================================="
-
-# @nodebb/nodebb-plugin-reactions is published as a scoped package, but NodeBB's
-# plugin scanner looks for node_modules/nodebb-plugin-*. Symlink so it's found.
-echo "===== Linking scoped @nodebb plugins ====="
-if [ -d node_modules/@nodebb/nodebb-plugin-reactions ] && [ ! -e node_modules/nodebb-plugin-reactions ]; then
-  ln -sfn "$(pwd)/node_modules/@nodebb/nodebb-plugin-reactions" "$(pwd)/node_modules/nodebb-plugin-reactions"
-  echo "  linked @nodebb/nodebb-plugin-reactions → nodebb-plugin-reactions"
-else
-  echo "  skipped (source missing or target exists)"
-fi
-echo "=========================================="
 
 # Symlink local plugins from local-plugins/ into node_modules/ so NodeBB sees them.
 echo "===== Linking local plugins ====="
