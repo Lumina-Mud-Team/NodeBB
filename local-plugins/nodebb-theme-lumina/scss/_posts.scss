@@ -144,6 +144,15 @@ body.template-topic .topic .posts-container {
 	background: rgba(212, 168, 75, 0.06);
 }
 
+// Harmony nasconde la toolbar di azione (reply/quote/reactions/menu) finché
+// non passi sopra il post (opacity:0 → 1 on :hover) su breakpoint ≥ lg. Noi
+// vogliamo che sia sempre visibile, niente "ricerca al buio" del like button.
+@include media-breakpoint-up(lg) {
+	body.template-topic .topic .posts [component="post"] [component="post/actions"] {
+		opacity: 1;
+	}
+}
+
 // Vote count
 [component="post/vote-count"] {
 	color: var(--lumina-fg-gold);
