@@ -23,8 +23,21 @@ npm install --omit=dev
 echo "===== Installing NodeBB plugins (npm) ====="
 npm install --omit=dev --no-save \
   nodebb-plugin-sso-google \
-  nodebb-plugin-custom-pages
+  nodebb-plugin-custom-pages \
+  nodebb-plugin-emoji \
+  @nodebb/nodebb-plugin-reactions
 echo "==========================================="
+
+# @nodebb/nodebb-plugin-reactions is published as a scoped package, but NodeBB's
+# plugin scanner looks for node_modules/nodebb-plugin-*. Symlink so it's found.
+echo "===== Linking scoped @nodebb plugins ====="
+if [ -d node_modules/@nodebb/nodebb-plugin-reactions ] && [ ! -e node_modules/nodebb-plugin-reactions ]; then
+  ln -sfn "$(pwd)/node_modules/@nodebb/nodebb-plugin-reactions" "$(pwd)/node_modules/nodebb-plugin-reactions"
+  echo "  linked @nodebb/nodebb-plugin-reactions → nodebb-plugin-reactions"
+else
+  echo "  skipped (source missing or target exists)"
+fi
+echo "=========================================="
 
 # Symlink local plugins from local-plugins/ into node_modules/ so NodeBB sees them.
 echo "===== Linking local plugins ====="
@@ -123,6 +136,8 @@ echo "======================================"
 # Activate plugins. Idempotent: nodebb activate is a no-op if already active.
 echo "===== Activating plugins ====="
 ./nodebb activate nodebb-plugin-sso-google || echo "  (sso-google activation failed, check logs)"
+./nodebb activate nodebb-plugin-emoji || echo "  (emoji activation failed, check logs)"
+./nodebb activate nodebb-plugin-reactions || echo "  (reactions activation failed, check logs)"
 # nodebb-plugin-lumina-game-link rimosso 2026-05-04 (non più desiderato)
 ./nodebb deactivate nodebb-plugin-lumina-game-link 2>/dev/null || true
 echo "=============================="
