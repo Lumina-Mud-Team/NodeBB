@@ -45,6 +45,56 @@ body.template-topic .topic .posts-container {
 	color: var(--lumina-fg);
 }
 
+// Markdown headings inside post bodies. The global h1-h6 rule in _fonts.scss
+// applies Cinzel + gold + 0.04em tracking everywhere — inside a post that
+// turns markdown headings into a uniform-looking gold block where the size
+// step between h1/h2/h3 (Bootstrap defaults 2.5/2/1.75rem) gets visually
+// flattened by the small-caps glyphs and identical letter-spacing.
+// Inside posts we want a plain editorial hierarchy: body font, no tracking,
+// stronger size steps, weight tapering down. Color stays slightly warm
+// (fg-gold for h1/h2, fg for h3+) so headings still feel "Lumina" without
+// the all-Cinzel uniform wash.
+[component="post/content"],
+.post-content {
+	h1, h2, h3, h4, h5, h6 {
+		font-family: var(--font-body);
+		font-weight: 700;
+		letter-spacing: 0;
+		text-transform: none;
+		line-height: 1.25;
+		margin-top: 1.4em;
+		margin-bottom: 0.5em;
+	}
+
+	h1 {
+		font-size: 2rem;
+		color: var(--lumina-fg-gold);
+		border-bottom: 1px solid var(--lumina-border-soft);
+		padding-bottom: 0.3em;
+	}
+	h2 {
+		font-size: 1.5rem;
+		color: var(--lumina-fg-gold);
+	}
+	h3 {
+		font-size: 1.25rem;
+		font-weight: 600;
+		color: var(--lumina-fg);
+	}
+	h4 {
+		font-size: 1.125rem;
+		font-weight: 600;
+		color: var(--lumina-fg);
+	}
+	h5, h6 {
+		font-size: 1rem;
+		font-weight: 600;
+		color: var(--lumina-fg-muted);
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+	}
+}
+
 [component="post/content"] a,
 .post-content a {
 	color: var(--lumina-fg-gold);
