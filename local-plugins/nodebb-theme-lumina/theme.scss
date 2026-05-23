@@ -1,2 +1,12 @@
+// Harmony's fonts.scss declares `$font-path: "./plugins/nodebb-theme-harmony"
+// !default` and emits @font-face URLs like
+// `/assets/plugins/nodebb-theme-harmony/inter/inter-latin-700-normal.woff2`.
+// Those only resolve at runtime if harmony is loaded as a plugin and its
+// staticDirs.inter mount is active. With lumina as the active child theme,
+// harmony is not loaded → 404 noise on every page load. NodeBB 4.x hard-mounts
+// `core/inter` and `core/poppins` at build time (src/meta/js.js linkStatics),
+// so pointing $font-path at ./plugins/core makes the URLs always resolve.
+$font-path: "./plugins/core";
+
 @import "../nodebb-theme-harmony/scss/harmony";
 @import "./scss/lumina";
