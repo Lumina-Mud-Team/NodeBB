@@ -18,8 +18,10 @@
 }
 [component="categories/category"] .meta.stats .card-header .text-xs,
 [component="categories/category"] .meta.stats .card-header span.text-lowercase {
-	letter-spacing: 0.02em;
-	font-family: var(--font-display);
+	letter-spacing: 0;
+	font-family: var(--font-body);
+	font-weight: 600;
+	text-transform: uppercase;
 	color: var(--lumina-fg-muted);
 	// Eccezione consapevole alla regola ≥1rem: queste sono micro-label
 	// dentro una card stretta, vincono la leggibilità sì, ma la priorità
@@ -48,14 +50,16 @@
 		0 0 36px -10px rgba(212, 168, 75, 0.22);
 }
 
-// Category title — gold display font
+// Category title — body bold, gold. Cinzel è riservato a brand wordmark
+// e ai titoli dei post (topic title).
 [component="categories"] [component="categories/category"] h2,
 [component="categories"] [component="categories/category"] h3,
 [component="categories"] [component="categories/category"] .category-title,
 [component="categories"] [component="categories/category"] a.title {
-	font-family: var(--font-display);
-	letter-spacing: 0.14em;
-	text-transform: uppercase;
+	font-family: var(--font-body);
+	font-weight: 700;
+	letter-spacing: 0;
+	text-transform: none;
 	color: var(--lumina-fg-gold);
 }
 
@@ -92,9 +96,10 @@
 }
 
 [component="category/header"] .category-name {
-	font-family: var(--font-display);
-	letter-spacing: 0.18em;
-	text-transform: uppercase;
+	font-family: var(--font-body);
+	font-weight: 700;
+	letter-spacing: 0;
+	text-transform: none;
 	color: var(--lumina-fg-gold);
 	background: linear-gradient(180deg, #8a6520 0%, #d4a84b 20%,
 		#f5d27a 60%, #fbe8b3 100%);
@@ -106,17 +111,27 @@
 // Watch / unwatch / new-topic buttons inherit `.btn-primary` styling
 // (handled by _buttons.scss).
 
-// Breadcrumbs (rune-divider style)
+// Breadcrumbs (rune-divider style). Visibili in alto su category/topic/
+// world/tag — danno il path di navigazione e l'unico modo non-logo per
+// tornare a Home. Padding verticale + border-bottom soft per non farli
+// sparire visivamente tra la navbar e il category-header.
 .breadcrumb {
 	background: transparent;
-	font-family: var(--font-display);
+	font-family: var(--font-body);
 	font-size: 1rem;
-	letter-spacing: 0.04em;
-	padding: 0.5rem 0;
+	letter-spacing: 0;
+	padding: 0.75rem 0;
+	margin-bottom: 0.75rem !important;
+	border-bottom: 1px solid var(--lumina-border-soft);
 }
 .breadcrumb-item,
 .breadcrumb-item a {
 	color: var(--lumina-fg-muted);
+	text-decoration: none;
+	transition: color 0.15s ease;
+}
+.breadcrumb-item a:hover {
+	color: var(--lumina-gold-hi);
 }
 .breadcrumb-item.active {
 	color: var(--lumina-fg-gold);
@@ -125,4 +140,6 @@
 	color: var(--lumina-gold-dim);
 	content: "◆";
 	padding: 0 0.5rem;
+	font-size: 0.7em;
+	vertical-align: middle;
 }

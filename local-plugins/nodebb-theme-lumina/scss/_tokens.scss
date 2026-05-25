@@ -5,14 +5,15 @@
 
 :root,
 body {
-	// Surfaces
+	// Surfaces — dark warm, allineate a lumina-site/src/styles/tokens.css
+	// (era bluish navy: bg #1b1b32 / panel #2a2c4a / border #4a4c70).
 	--lumina-ink: #05060b;
-	--lumina-bg: #1b1b32;
-	--lumina-panel: #2a2c4a;
-	--lumina-panel-2: #353756;
-	--lumina-field: #15162a;
-	--lumina-border: #4a4c70;
-	--lumina-border-soft: #2f314f;
+	--lumina-bg: #09080a;
+	--lumina-panel: #100f0d;
+	--lumina-panel-2: #151310;
+	--lumina-field: #0b0a08;
+	--lumina-border: #221e18;
+	--lumina-border-soft: #171410;
 
 	// Gold (primary action / brand)
 	--lumina-gold: #d4a84b;
@@ -51,7 +52,7 @@ body {
 	// list-group, alerts, tables…) inherits Lumina automatically.
 	// ----------------------------------------------------------
 	--bs-body-bg: var(--lumina-bg);
-	--bs-body-bg-rgb: 27, 27, 50;
+	--bs-body-bg-rgb: 9, 8, 10;
 	--bs-body-color: var(--lumina-fg);
 	--bs-body-color-rgb: 232, 227, 212;
 
@@ -62,14 +63,14 @@ body {
 	--bs-secondary-color: var(--lumina-fg-muted);
 	--bs-secondary-color-rgb: 182, 174, 152;
 	--bs-secondary-bg: var(--lumina-panel);
-	--bs-secondary-bg-rgb: 42, 44, 74;
+	--bs-secondary-bg-rgb: 16, 15, 13;
 
 	--bs-tertiary-color: var(--lumina-fg-dim);
 	--bs-tertiary-bg: var(--lumina-panel-2);
-	--bs-tertiary-bg-rgb: 53, 55, 86;
+	--bs-tertiary-bg-rgb: 21, 19, 16;
 
 	--bs-border-color: var(--lumina-border);
-	--bs-border-color-translucent: rgba(31, 35, 64, 0.55);
+	--bs-border-color-translucent: rgba(34, 30, 24, 0.55);
 
 	--bs-link-color: var(--lumina-fg-gold);
 	--bs-link-color-rgb: 230, 197, 115;
@@ -95,7 +96,7 @@ body {
 	--bs-danger-rgb: 254, 100, 66;
 
 	--bs-light: var(--lumina-panel-2);
-	--bs-light-rgb: 23, 26, 48;
+	--bs-light-rgb: 21, 19, 16;
 	--bs-dark: var(--lumina-ink);
 	--bs-dark-rgb: 5, 6, 11;
 

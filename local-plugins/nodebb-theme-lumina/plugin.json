@@ -11,7 +11,8 @@
     { "hook": "filter:middleware.renderHeader", "method": "filterMiddlewareRenderHeader" }
   ],
   "scripts": [
-    "../nodebb-theme-harmony/public/harmony.js"
+    "../nodebb-theme-harmony/public/harmony.js",
+    "public/lumina-edit-mode.js"
   ],
   "modules": {
     "../admin/plugins/harmony.js": "../nodebb-theme-harmony/public/admin.js",

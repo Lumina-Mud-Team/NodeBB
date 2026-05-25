@@ -76,15 +76,20 @@ body.template-topic .topic .posts-container {
 		font-size: 1.5rem;
 		color: var(--lumina-fg-gold);
 	}
+	// h3/h4 erano fg parchment per "tonare giù" la gerarchia, ma il
+	// preview del composer (`.composer .preview`) eredita la regola
+	// globale h1-h6 di _fonts.scss (gold). Risultato: in edit erano
+	// tutti gialli, nel post resi h3/h4 bianchi. Allineato: gold fino
+	// a h4, gerarchia mantenuta da size/weight.
 	h3 {
 		font-size: 1.25rem;
 		font-weight: 600;
-		color: var(--lumina-fg);
+		color: var(--lumina-fg-gold);
 	}
 	h4 {
 		font-size: 1.125rem;
 		font-weight: 600;
-		color: var(--lumina-fg);
+		color: var(--lumina-fg-gold);
 	}
 	h5, h6 {
 		font-size: 1rem;
@@ -109,7 +114,7 @@ body.template-topic .topic .posts-container {
 // Quote blocks inside posts
 [component="post/content"] blockquote,
 .post-content blockquote {
-	background: rgba(8, 9, 16, 0.55);
+	background: rgba(5, 6, 11, 0.55);
 	border-left: 3px solid var(--lumina-gold-dim);
 	padding: 0.75em 1em;
 	color: var(--lumina-fg-muted);
@@ -129,8 +134,9 @@ body.template-topic .topic .posts-container {
 [component="post"] .username,
 [component="post/anonymous"],
 .post-info .username a {
-	font-family: var(--font-display);
-	letter-spacing: 0.02em;
+	font-family: var(--font-body);
+	font-weight: 600;
+	letter-spacing: 0;
 	color: var(--lumina-fg-gold);
 	font-size: 1rem;
 }
@@ -138,31 +144,11 @@ body.template-topic .topic .posts-container {
 [component="post/header"] .timeago,
 [component="post/header"] small,
 [component="post"] .text-muted {
-	font-family: var(--font-serif);
-	font-style: italic;
+	font-family: var(--font-body);
 	color: var(--lumina-fg-dim) !important;
 }
 
-// Avatar gold ring — the timeline-style layout offsets avatars outside the
-// post box, so we wrap them in a clearly intentional medallion frame:
-// 2px gold-dim border + outer ring matching the body bg (creates visual
-// separation between avatar and post border).
-[component="post"] .avatar,
-[component="post"] img.avatar {
-	border: 2px solid var(--lumina-gold-dim);
-	box-shadow:
-		0 0 0 2px var(--lumina-bg),
-		0 0 0 3px rgba(212, 168, 75, 0.25),
-		0 4px 12px -4px rgba(0, 0, 0, 0.6);
-	transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-[component="post"]:hover .avatar {
-	border-color: var(--lumina-gold);
-	box-shadow:
-		0 0 0 2px var(--lumina-bg),
-		0 0 0 3px rgba(212, 168, 75, 0.55),
-		0 0 18px rgba(212, 168, 75, 0.3);
-}
+// Avatar: usiamo i default di Harmony, niente override Lumina.
 
 // Post tools (vote, reply, share, bookmark)
 [component="post/tools"],
@@ -206,8 +192,9 @@ body.template-topic .topic .posts-container {
 // Vote count
 [component="post/vote-count"] {
 	color: var(--lumina-fg-gold);
-	font-family: var(--font-display);
-	letter-spacing: 0.1em;
+	font-family: var(--font-body);
+	font-weight: 700;
+	letter-spacing: 0;
 }
 
 // Reactions (if reactions plugin active)

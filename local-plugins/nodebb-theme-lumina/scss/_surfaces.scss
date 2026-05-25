@@ -29,8 +29,9 @@ body.skin-noskin {
 	background-color: var(--bs-card-cap-bg);
 	color: var(--bs-card-cap-color);
 	border-bottom-color: var(--lumina-border);
-	font-family: var(--font-display);
-	letter-spacing: 0.02em;
+	font-family: var(--font-body);
+	font-weight: 600;
+	letter-spacing: 0;
 	font-size: 1rem;
 }
 
@@ -63,23 +64,141 @@ html {
 	color: var(--lumina-ink);
 }
 
-// Code blocks rendered by the markdown plugin
-pre,
-.hljs,
-code {
+// Code blocks rendered by the markdown plugin (markdown-it / highlight.js).
+//
+// La versione precedente lasciava `code` allo stesso bg di `pre` e quasi
+// senza padding (1px 6px) — su una riga di prosa il chip <code> si fondeva
+// col paragrafo e a 14px Inter dentro mono-fallback diventava illeggibile.
+//
+// Ora:
+//   - inline <code>:  tinta gold-dim su panel-2 caldo, padding orizzontale
+//     più ariosa, font-size locked a 0.95em (legge appena più piccolo del
+//     paragrafo) e font-mono garantito.
+//   - <pre>:          riquadro vero con padding generoso, gold-dim border
+//     e overflow orizzontale, così snippet lunghi non rompono il layout.
+:not(pre) > code,
+:not(pre) > code.hljs {
+	background-color: var(--lumina-panel-2) !important;
+	color: var(--lumina-fg-gold) !important;
+	border: 1px solid var(--lumina-border) !important;
+	border-radius: 3px;
+	padding: 0.1em 0.45em;
+	font-family: var(--font-mono);
+	font-size: 0.95em;
+	word-break: break-word;
+}
+
+pre {
 	background-color: var(--lumina-field) !important;
 	color: var(--lumina-fg) !important;
-	border: 1px solid var(--lumina-border-soft);
+	border: 1px solid var(--lumina-gold-dim);
 	border-radius: 4px;
+	padding: 0.9rem 1.1rem;
+	margin: 1em 0;
+	overflow-x: auto;
+	font-family: var(--font-mono);
+	font-size: 1rem;
+	line-height: 1.55;
+	box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.5);
 }
-code { padding: 1px 6px; }
-pre code { border: 0; padding: 0; }
+
+pre code,
+pre code.hljs {
+	background-color: transparent !important;
+	color: inherit !important;
+	border: 0 !important;
+	padding: 0;
+	font-size: inherit;
+	font-family: inherit;
+}
+
+// Highlight.js token colors — palette Lumina (gold / parchment / verde-success).
+// nodebb-plugin-markdown carica un tema hljs scelto da ACP (default rossastro)
+// che faceva le variabili rosse. Override per:
+//   - tenere tutto su gold/parchment (warm)
+//   - usare success per le stringhe (un solo accent verde, leggibile)
+//   - shadow-hi solo per deletion/error (heretic palette = "qualcosa di rotto")
+// Specificità più alta del file CSS standalone del plugin grazie a `pre code.hljs`.
+pre code.hljs,
+.hljs {
+	color: var(--lumina-fg) !important;
+	background: transparent !important;
+}
+
+.hljs-comment,
+.hljs-quote {
+	color: var(--lumina-fg-dim) !important;
+	font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-tag .hljs-name,
+.hljs-built_in {
+	color: var(--lumina-gold) !important;
+}
+
+.hljs-string,
+.hljs-doctag,
+.hljs-regexp,
+.hljs-bullet {
+	color: var(--lumina-success) !important;
+}
+
+.hljs-number,
+.hljs-symbol,
+.hljs-meta {
+	color: var(--lumina-gold-hi) !important;
+}
+
+.hljs-type,
+.hljs-class .hljs-title,
+.hljs-section,
+.hljs-title {
+	color: var(--lumina-fg-gold) !important;
+}
+
+.hljs-function .hljs-title,
+.hljs-attr,
+.hljs-attribute,
+.hljs-name {
+	color: var(--lumina-fg-gold) !important;
+}
+
+.hljs-variable,
+.hljs-template-variable,
+.hljs-params {
+	color: var(--lumina-fg) !important;
+}
+
+.hljs-operator,
+.hljs-punctuation {
+	color: var(--lumina-fg-muted) !important;
+}
+
+.hljs-link {
+	color: var(--lumina-info) !important;
+	text-decoration: underline;
+}
+
+.hljs-emphasis { font-style: italic; }
+.hljs-strong   { font-weight: 700; }
+
+.hljs-deletion {
+	color: var(--lumina-shadow-hi) !important;
+	background: rgba(217, 146, 138, 0.08) !important;
+}
+.hljs-addition {
+	color: var(--lumina-success) !important;
+	background: rgba(109, 218, 104, 0.08) !important;
+}
 
 // Badges (post counts, unread indicators, group flair)
 .badge {
-	font-family: var(--font-display);
-	letter-spacing: 0.12em;
-	font-weight: 500;
+	font-family: var(--font-body);
+	letter-spacing: 0;
+	font-weight: 600;
 }
 
 .badge.bg-primary,
@@ -100,6 +219,4 @@ pre code { border: 0; padding: 0; }
 	background-color: var(--lumina-ink);
 	color: var(--lumina-fg);
 	border: 1px solid var(--lumina-gold-dim);
-	font-family: var(--font-serif);
-	font-style: italic;
 }

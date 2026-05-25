@@ -9,13 +9,15 @@
 // Keep both layers in sync.
 
 // ---- Lumina palette ----
+// Dark warm, allineata a lumina-site/src/styles/tokens.css.
+// Tieni in sync con scss/_tokens.scss (runtime CSS custom properties).
 $lumina-ink:        #05060b;
-$lumina-bg:         #1b1b32;
-$lumina-panel:      #2a2c4a;
-$lumina-panel-2:    #353756;
-$lumina-field:      #15162a;
-$lumina-border:     #4a4c70;
-$lumina-border-soft:#2f314f;
+$lumina-bg:         #09080a;
+$lumina-panel:      #100f0d;
+$lumina-panel-2:    #151310;
+$lumina-field:      #0b0a08;
+$lumina-border:     #221e18;
+$lumina-border-soft:#171410;
 
 $lumina-gold:       #d4a84b;
 $lumina-gold-hi:    #f5d27a;
@@ -38,10 +40,10 @@ $lumina-info:       #5dc4ff;
 // Bootstrap derives a lot from $gray-*; flipping these makes any
 // component we don't explicitly touch land closer to the dark theme.
 $white:    $lumina-fg !default;
-$gray-100: #1a1d35 !default;
+$gray-100: #14110d !default;
 $gray-200: $lumina-panel-2 !default;
 $gray-300: $lumina-border !default;
-$gray-400: #2a2e4d !default;
+$gray-400: #1e1a14 !default;
 $gray-500: $lumina-fg-dim !default;
 $gray-600: $lumina-fg-muted !default;
 $gray-700: $lumina-fg !default;

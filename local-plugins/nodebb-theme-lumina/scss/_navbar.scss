@@ -10,25 +10,28 @@
 .navbar,
 nav.navbar {
 	background:
-		linear-gradient(180deg, #05060b 0%, #1b1b32 100%);
+		linear-gradient(180deg, #05060b 0%, #100f0d 100%);
 	border-bottom: 1px solid var(--lumina-border-soft);
 	box-shadow: 0 8px 24px -16px rgba(0, 0, 0, 0.8);
 }
 
-.navbar .navbar-brand,
 .navbar .nav-link {
 	color: var(--lumina-fg-muted);
-	font-family: var(--font-display);
-	letter-spacing: 0.04em;
+	font-family: var(--font-body);
+	letter-spacing: 0;
 	font-size: 1rem;
+	font-weight: 500;
 	transition: color 0.2s ease, text-shadow 0.25s ease;
 }
 
 .navbar .navbar-brand {
 	color: var(--lumina-fg-gold);
+	font-family: var(--font-display);
 	font-weight: 600;
 	letter-spacing: 0.06em;
+	font-size: 1rem;
 	text-shadow: 0 0 16px rgba(212, 168, 75, 0.25);
+	transition: color 0.2s ease, text-shadow 0.25s ease;
 }
 
 .navbar .nav-link:hover,
@@ -48,11 +51,10 @@ nav.navbar {
 // Search box in the header
 .navbar .form-control,
 .navbar input[type="search"] {
-	background-color: rgba(8, 9, 16, 0.55);
+	background-color: rgba(5, 6, 11, 0.55);
 	color: var(--lumina-fg);
 	border: 1px solid var(--lumina-border);
-	font-family: var(--font-serif);
-	font-style: italic;
+	font-family: var(--font-body);
 }
 
 .navbar .form-control::placeholder {
@@ -61,7 +63,7 @@ nav.navbar {
 }
 
 .navbar .form-control:focus {
-	background-color: rgba(8, 9, 16, 0.85);
+	background-color: rgba(5, 6, 11, 0.85);
 	border-color: var(--lumina-gold-dim);
 	box-shadow: 0 0 0 0.15rem var(--lumina-gold-glow);
 	color: var(--lumina-fg);

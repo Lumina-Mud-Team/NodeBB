@@ -133,17 +133,85 @@
 		'FontAwesome' !important;
 }
 
-// Topic-select checkbox (icona quadratino sotto avatar quando showSelect=true,
-// utenti admin). Harmony lo mette via .hover-visible che richiede un
-// .hover-parent ancestor — senza quello sta sempre visibile e penzola sotto
-// l'avatar. Lo nascondiamo finché non hover sull'avatar stesso.
+// Topic-select checkbox (showSelect=true → staff bulk-move/lock/delete).
+//
+// Default: nascosto. Attivabile via toggle "Modifica" nella tab bar
+// (public/lumina-edit-mode.js), che mette `body.lumina-edit-mode`.
+//
+// Edit mode attivo (desktop ≥ lg):
+//   1. padding-left 56px sul <li> apre una gutter dedicata
+//   2. .checkbox absolute a left:-44px del wrapper avatar (= 12px dal
+//      bordo sinistro del <li>), centrato verticalmente. ~9px clearance
+//      dal box-shadow inset 3px gold dello stato hover/unread.
+//   3. Il quadratino è 24×24 (era 18) per essere chiaramente cliccabile
+//      in modo bulk.
+//   4. `.d-lg-flex` scopa solo desktop — la versione mobile del template
+//      (`.d-lg-none top-0 end-0`) resta intoccata.
 [component="category/topic"] .checkbox {
-	visibility: hidden;
+	display: none !important;
 }
-[component="category/topic"] .item-img:hover .checkbox,
-[component="category/topic"]:hover .checkbox,
-[component="category/topic"].selected .checkbox {
-	visibility: visible;
+
+body.lumina-edit-mode [component="category/topic"] .checkbox {
+	display: flex !important;
+}
+
+@include media-breakpoint-up(lg) {
+	body.lumina-edit-mode [component="category/topic"] {
+		padding-left: 56px !important;
+	}
+	body.lumina-edit-mode [component="category/topic"] .checkbox.d-lg-flex {
+		position: absolute !important;
+		top: 50% !important;
+		left: -44px !important;
+		right: auto !important;
+		bottom: auto !important;
+		transform: translateY(-50%) !important;
+		padding: 0 !important;
+		margin: 0 !important;
+		max-width: none !important;
+		z-index: 1;
+	}
+}
+
+body.lumina-edit-mode [component="category/topic"] [component="topic/select"] {
+	background: rgba(5, 6, 11, 0.85);
+	color: var(--lumina-gold);
+	border: 1px solid var(--lumina-gold-dim);
+	border-radius: 4px;
+	width: 24px;
+	height: 24px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.95rem;
+	line-height: 1;
+	padding: 0 !important;
+	opacity: 0.85;
+	cursor: pointer;
+	transition: opacity 0.15s ease, color 0.15s ease,
+		border-color 0.15s ease, background 0.15s ease;
+}
+body.lumina-edit-mode [component="category/topic"] [component="topic/select"]:hover,
+[component="category/topic"].selected [component="topic/select"] {
+	opacity: 1;
+	color: var(--lumina-gold-hi);
+	border-color: var(--lumina-gold);
+}
+
+// Row selezionata: tinta gold leggera per feedback visivo bulk-select.
+[component="category/topic"].selected {
+	background-color: rgba(212, 168, 75, 0.08);
+}
+
+// Toggle "Modifica" nella topic-list-bar (iniettato dallo script).
+// Stato attivo = sfondo gold soft + testo gold-hi.
+.lumina-edit-toggle.active {
+	background-color: rgba(212, 168, 75, 0.12);
+	border: 1px solid var(--lumina-gold-dim);
+}
+.lumina-edit-toggle.active i.fa,
+.lumina-edit-toggle.active span {
+	color: var(--lumina-gold-hi) !important;
 }
 
 // Stato "selected": harmony usa `.fa-check-square-o` (FA6 `square-check` via
@@ -192,10 +260,11 @@ tag-item,
 	color: var(--lumina-fg-gold) !important;
 	border: 1px solid var(--lumina-gold-dim) !important;
 	border-radius: 2px !important;
-	font-family: var(--font-display);
-	font-size: 1rem;
-	letter-spacing: 0.18em;
-	text-transform: uppercase;
+	font-family: var(--font-body);
+	font-size: 0.875rem;
+	font-weight: 500;
+	letter-spacing: 0;
+	text-transform: none;
 	padding: 2px 8px !important;
 }
 .tag-list .tag::before,

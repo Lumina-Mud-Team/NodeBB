@@ -33,8 +33,8 @@ textarea.form-control {
 
 .form-label,
 label.form-label {
-	font-family: var(--font-display);
-	letter-spacing: 0.02em;
+	font-family: var(--font-body);
+	font-weight: 600;
 	font-size: 1rem;
 	color: var(--lumina-fg-muted);
 }
@@ -43,8 +43,7 @@ label.form-label {
 .help-block,
 .form-text.text-muted {
 	color: var(--lumina-fg-dim) !important;
-	font-family: var(--font-serif);
-	font-style: italic;
+	font-family: var(--font-body);
 }
 
 // Switches & checkboxes

@@ -11,19 +11,23 @@ body {
 	text-rendering: optimizeLegibility;
 }
 
-// Headings: Cinzel + gold + tracking, MA NIENTE uppercase globale.
-// Le poche superfici dove vogliamo "title" all-caps (brand wordmark,
-// h1 del topic, category card titles, banner categoria) lo dichiarano
-// esplicitamente nei loro file. Per tutto il resto, mixed case.
+// Headings: body sans + gold a peso/size differenziato.
+// Cinzel (font-display) resta riservato a:
+//   - brand wordmark (`.lumina-brand-*` in _navbar.scss)
+//   - topic title h1 (in _topics.scss [component="topic"] h1)
+//   - topic title in row listing (`.topic-title` in _topics.scss)
+//   - `.eyebrow` di section header (qui sotto)
+// Per tutto il resto si usa il body, perché Cinzel diffuso su chrome
+// (modal, badge, tab, post author...) lo rendeva poco leggibile.
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-	font-family: var(--font-display);
-	font-weight: 600;
-	letter-spacing: 0.04em;
+	font-family: var(--font-body);
+	font-weight: 700;
+	letter-spacing: 0;
 	color: var(--lumina-fg-gold);
 }
 
-// Lumina "eyebrow" style — used on category headers
+// Lumina "eyebrow" style — used on category headers (rare, brand-adjacent).
 .eyebrow,
 .text-uppercase.fw-bold {
 	font-family: var(--font-display);

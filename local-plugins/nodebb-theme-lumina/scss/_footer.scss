@@ -1,12 +1,18 @@
 // Site footer (footer.tpl).
 
-#footer,
-.footer {
-	background-color: #04050a;
-	border-top: 1px solid var(--lumina-border-soft);
-	color: var(--lumina-fg-muted);
-	font-family: var(--font-serif);
-	font-style: italic;
+// Footer styling: solo link gold se altri widget vi compaiono.
+// La `<footer id="footer">` del widget sidebar-footer (Powered by NodeBB)
+// resta nascosta dalla regola in _misc.scss.
+#footer a,
+.footer a {
+	color: var(--lumina-fg-gold);
+	border-bottom: 1px solid transparent;
+	transition: color 0.2s ease, border-color 0.2s ease;
+}
+#footer a:hover,
+.footer a:hover {
+	color: var(--lumina-gold-hi);
+	border-bottom-color: var(--lumina-gold-glow);
 }
 
 #footer a,
@@ -22,10 +28,14 @@
 	border-bottom-color: var(--lumina-gold-glow);
 }
 
-// Sidebar (right rail) styling — Harmony uses .sidebar
+// Sidebar (left + right rail) — Harmony rende i <nav class="sidebar"> con
+// `.bg-light` (Bootstrap !important), che dopo i nostri token compila a
+// `--lumina-panel-2` = #151310 → sidebars con tinta leggermente più chiara
+// del bg pagina #09080a. L'utente vuole zero stacco: stesso bg del body.
 .sidebar,
-[component="sidebar"] {
-	background-color: transparent;
+[component="sidebar"],
+nav.sidebar.bg-light {
+	background-color: var(--lumina-bg) !important;
 }
 
 .sidebar .card,

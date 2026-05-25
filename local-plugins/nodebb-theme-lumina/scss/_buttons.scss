@@ -2,10 +2,10 @@
 // the gold gradient here mirrors the public site's `.btn-primary`.
 
 .btn {
-	font-family: var(--font-display);
+	font-family: var(--font-body);
 	font-size: 1rem;
-	font-weight: 700;
-	letter-spacing: 0.04em;
+	font-weight: 600;
+	letter-spacing: 0;
 	border-radius: 3px;
 	transition: transform 0.15s ease, box-shadow 0.2s ease,
 		background-color 0.2s ease, border-color 0.2s ease,
@@ -54,7 +54,7 @@
 .btn-outline-secondary,
 .btn.btn-light,
 .btn-outline-primary {
-	background: rgba(8, 9, 16, 0.7);
+	background: rgba(5, 6, 11, 0.7);
 	color: var(--lumina-fg-gold);
 	border: 1px solid var(--lumina-gold-dim);
 }
@@ -99,8 +99,8 @@
 .btn-sm,
 .btn.btn-sm {
 	font-size: 1rem;
-	letter-spacing: 0.04em;
-	font-weight: 700;
+	letter-spacing: 0;
+	font-weight: 600;
 	padding: 5px 12px;
 }
 
@@ -120,8 +120,8 @@
 [component="topic/quickreply/button"],
 [component="topic/reply/locked"],
 [component="topic/reply/guest"] {
-	font-weight: 800 !important;
-	letter-spacing: 0.14em;
+	font-weight: 700 !important;
+	letter-spacing: 0;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 

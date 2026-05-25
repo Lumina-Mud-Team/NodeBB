@@ -3,7 +3,7 @@
 // Alerts
 .alerts,
 .alert {
-	background-color: rgba(17, 20, 39, 0.92);
+	background-color: rgba(16, 15, 13, 0.92);
 	border: 1px solid var(--lumina-border);
 	color: var(--lumina-fg);
 	border-radius: 4px;
@@ -30,7 +30,7 @@
 
 // Toast notifications
 .toast {
-	background-color: rgba(17, 20, 39, 0.95) !important;
+	background-color: rgba(16, 15, 13, 0.95) !important;
 	border: 1px solid var(--lumina-gold-dim) !important;
 	color: var(--lumina-fg) !important;
 	box-shadow:
@@ -38,10 +38,11 @@
 		0 0 24px -10px rgba(212, 168, 75, 0.35);
 }
 .toast-header {
-	background-color: rgba(8, 9, 16, 0.7) !important;
+	background-color: rgba(5, 6, 11, 0.7) !important;
 	color: var(--lumina-fg-gold) !important;
-	font-family: var(--font-display);
-	letter-spacing: 0.02em;
+	font-family: var(--font-body);
+	font-weight: 600;
+	letter-spacing: 0;
 }
 
 // Modals
@@ -57,8 +58,9 @@
 	border-color: var(--lumina-border);
 }
 .modal-title {
-	font-family: var(--font-display);
-	letter-spacing: 0.02em;
+	font-family: var(--font-body);
+	font-weight: 600;
+	letter-spacing: 0;
 	color: var(--lumina-fg-gold);
 }
 .modal-backdrop.show {
@@ -90,15 +92,16 @@
 }
 .dropdown-header {
 	color: var(--lumina-fg-dim);
-	font-family: var(--font-display);
-	letter-spacing: 0.02em;
+	font-family: var(--font-body);
+	font-weight: 600;
+	letter-spacing: 0;
 	font-size: 1rem;
+	text-transform: uppercase;
 }
 
-// Dropdown item content: keep body font for descriptions/help-text. Only the
-// `.fw-semibold` title row gets Cinzel uppercase gold treatment, so a watch /
-// tracking / not-watching menu reads as "TITLE in display font" + "description
-// in regular body font" instead of the whole box being all-Cinzel small caps.
+// Dropdown items: tutto in body sans. Il `.fw-semibold` (row "titolo" dei
+// menu watch/tracking/etc.) mantiene il bold del bootstrap utility ma resta
+// nel font-body — Cinzel su una voce di menu si leggeva come placeholder.
 .dropdown-menu .dropdown-item,
 .dropdown-menu .dropdown-item .help-text,
 .dropdown-menu .dropdown-item .text-secondary {
@@ -107,8 +110,7 @@
 	letter-spacing: normal;
 }
 .dropdown-menu .dropdown-item .fw-semibold {
-	font-family: var(--font-display);
-	letter-spacing: 0.02em;
+	font-family: var(--font-body);
 	color: var(--lumina-fg-gold);
 }
 
@@ -119,8 +121,9 @@
 .nav-tabs .nav-link {
 	color: var(--lumina-fg-muted);
 	border-color: transparent;
-	font-family: var(--font-display);
-	letter-spacing: 0.02em;
+	font-family: var(--font-body);
+	font-weight: 600;
+	letter-spacing: 0;
 	font-size: 1rem;
 }
 .nav-tabs .nav-link:hover {
@@ -146,8 +149,9 @@
 
 // Pagination
 .pagination .page-link {
-	font-family: var(--font-display);
-	letter-spacing: 0.12em;
+	font-family: var(--font-body);
+	font-weight: 600;
+	letter-spacing: 0;
 }
 
 // Chats (Harmony renders chats with .chat-modal / .chats-list)
@@ -185,15 +189,17 @@
 
 .profile h1,
 .profile h2 {
-	font-family: var(--font-display);
-	letter-spacing: 0.04em;
+	font-family: var(--font-body);
+	font-weight: 700;
+	letter-spacing: 0;
 	color: var(--lumina-fg-gold);
 }
 
 // Group flair (custom-css from group settings still applies)
 .group-label {
-	font-family: var(--font-display);
-	letter-spacing: 0.02em;
+	font-family: var(--font-body);
+	font-weight: 600;
+	letter-spacing: 0;
 	font-size: 1rem;
 }
 
